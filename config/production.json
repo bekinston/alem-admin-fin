@@ -1,0 +1,6 @@
+{
+  "port" : 8080,
+  "jwtSecret": "alem_admin",
+
+  "mongoUri":"mongodb+srv://bekinston:jovzom-rAdfot-8tudwa@alem.3swbn.mongodb.net/alem?retryWrites=true&w=majority"
+}
