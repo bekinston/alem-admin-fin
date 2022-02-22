@@ -4,6 +4,8 @@ const auth = require('../middleware/auth.middleware')
 const fs = require('fs')
 const stream = require('stream')
 const router = Router()
+const http2 = require('http2')
+
 
 var EasyYandexS3 = require("easy-yandex-s3")
 
@@ -15,6 +17,8 @@ var s3 = new EasyYandexS3({
   Bucket: "alemuploads",
   debug: false
 })
+
+
 
 router.use(multer().any())
 
@@ -48,5 +52,11 @@ router.post('/upload', async (req, res) => {
     res.status(500).json({e})
   }
 })
+
+
+
+
+
+
 
 module.exports = router

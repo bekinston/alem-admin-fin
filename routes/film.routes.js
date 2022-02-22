@@ -5,7 +5,7 @@ const router = Router()
 
 router.post('/generate', auth, async (req, res) => {
   try {
-    const {name, year, genres, country, time, desc, filmuri, filmlogo, bannerver, bannerhor, trailer,
+    const {name, year, genres, country, time, desc, filmuri, filmlogo, bannerver, bannerhor, trailer,onscreen,
     director, directorp,
     actor1, actor1p,
     actor2, actor2p,
@@ -26,7 +26,7 @@ router.post('/generate', auth, async (req, res) => {
     }
 
 
-    const film = new Film({name, year, genres, country, time, desc, filmuri, filmlogo, bannerver, bannerhor, trailer,
+    const film = new Film({name, year, genres, country, time, desc, filmuri, filmlogo, bannerver, bannerhor, trailer,onscreen,
       director, directorp,
       actor1, actor1p,
       actor2, actor2p,

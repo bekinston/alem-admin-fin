@@ -22,13 +22,11 @@ router.post('/deletefilm', async (req, res) => {
   try {
     const {name} = req.body
 
-    console.log(name)
 
     const go = await Film.updateOne({name}, {$set: {state : "zero"}})
 
-
-
     res.status(201).json({ message:'Фильм удален' })
+
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
@@ -36,7 +34,21 @@ router.post('/deletefilm', async (req, res) => {
 
 router.post('/addfilm', async (req, res) => {
   try {
+
+
+
+
+
     const {name, promo, cost} = req.body
+
+    var onsc = 90
+
+    const days = await Film.findOne({name, onscreen:"90"})
+    if (!days){
+         onsc = 45
+    }
+
+
 
     if(cost.length === 0){
       return res.json({message:'Введите стоимость фильма'})
@@ -60,7 +72,42 @@ router.post('/addfilm', async (req, res) => {
       return res.json({message:'Фильм не существует'})
     }
 
-    const go = await Film.updateOne({name}, {$set: {state : "go", promo : promo, cost: cost}})
+
+
+    let date = Date.now()
+
+    let d1 = new Date(date),
+        month1 = '' + (d1.getMonth() + 1),
+        day1 = '' + d1.getDate(),
+        year1 = d1.getFullYear();
+
+    if (month1.length < 2)
+        month1 = '0' + month1;
+    if (day1.length < 2)
+        day1 = '0' + day1;
+
+        var result = new Date(date);
+        result.setDate(result.getDate() + onsc);
+
+        let d2 = new Date(result),
+        month2 = '' + (d2.getMonth() + 1),
+        day2 = '' + d2.getDate(),
+        year2 = d2.getFullYear();
+
+        if (month2.length < 2)
+            month2 = '0' + month2;
+        if (day2.length < 2)
+            day2 = '0' + day2;
+
+
+    var startdate1 = [day1, month1, year1].join('.')
+
+    var enddate1 = [day2, month2, year2].join('.')
+
+
+    const go = await Film.updateOne({name}, {$set: {state : "go", promo : promo, cost: cost, startdate: startdate1, enddate:enddate1 }})
+
+
 
     res.status(201).json({ message:'Фильм добавлен' })
   } catch (e) {

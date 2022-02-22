@@ -267,3 +267,85 @@ div.fcards{
 p.pfilms{
   font-weight: bold;
 }
+
+span.hfilms{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+p.efilms{
+  font-size: 12px;
+}
+
+circle.zero{
+  fill: orange;
+}
+
+circle.go{
+  fill: green;
+}
+
+
+
+button.films-btn{
+  margin-top: 20px;
+  width: 100%;
+}
+
+button.films-btn{
+  margin-top: 10px;
+  border-radius: 7px;
+  color: black;
+  background: white;
+  font-weight: 300;
+  padding: 10px 20px;
+  border: 1px solid white;
+
+}
+
+button.films-btn:hover{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+button.films-btn:focus{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+div.radio-field{
+
+  width: 91% !important;
+  border-radius: 5px;
+}
+
+div.radio1{
+  width:50%;
+  float: left;
+}
+
+
+div.radio2{
+  width:50%;
+  float: left;
+}
+
+
+
+p.hidden{
+  color: transparent;
+}
+
+img.personimg{
+  margin-bottom: 20px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  border: 1px solid cyan;
+  text-align: center;
+  background: white;
+}

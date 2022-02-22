@@ -21,7 +21,6 @@ export const NFilmsList = ({ users }) => {
           <div className = "card purple lighten-5">
             <div style={{padding:15}}>
               <p style={{marginTop:20}} className="left pcalc">Фильмы в прокате</p>
-              <button className = "z-depth-1 login1-btn right">Обновить</button>
             </div>
 
 

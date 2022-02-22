@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
 
+
 export const CreatePage = () => {
 
   const auth = useContext(AuthContext)
   const message = useMessage()
   const {loading, request, error, clearError} = useHttp()
   const navigate = useNavigate();
+
+
 
 
   const [disabled, setDisabled] = useState({
@@ -32,6 +35,8 @@ export const CreatePage = () => {
     message(data.message)
     console.log(data)
   }
+
+
 
 
   const [udir, setUdir] = useState({
@@ -512,11 +517,8 @@ export const CreatePage = () => {
     })
   }
 
-
-
-
-
   const [film, setFilm] = useState({
+    onscreen:'',
     name:'',
     year:'',
     country:'',
@@ -576,9 +578,7 @@ export const CreatePage = () => {
         const data = await request('/api/film/generate', 'POST', {...film}, {Authorization:`Bearer ${auth.token}`})
         message(data.message)
 
-
-
-        navigate("/films")
+        navigate('/films')
 
 
     } catch (e) {
@@ -586,6 +586,17 @@ export const CreatePage = () => {
     }
 
   }
+
+
+
+  const uploadtest = async() => {
+    const d = "1"
+    const data = await request('/api/upload/uploadvideo', 'POST', {d})
+  }
+
+
+
+
 
 
 
@@ -617,9 +628,46 @@ export const CreatePage = () => {
               onChange = {dir}
               value = {dirname.direction}
             /></center>
+
+          <input hidden name ="dir" value = {film.dir = dirname.direction} onChange={changeHandler}/>
           <button style={{marginLeft:50}} onClick={dirHandler} className="login1-btn center z-depth-1 center">Создать путь </button>
           </div>
+
         </div>
+
+        <div className = "card yellow lighten-5 center">
+
+          <h5 className = "head center">Количество дней в прокате</h5>
+
+          <center><div className = "radio-field">
+            <div onChange={changeHandler} value = {film.onscreen}>
+
+
+              <div className = "radio1">
+                <p style = {{width:300}}>
+                  <label>
+                    <input className = "input" name="onscreen" type="radio" value="45"/>
+                    <span>45 дней</span>
+                  </label>
+                </p>
+              </div>
+
+              <div className = "radio2">
+                <p>
+                  <label>
+                    <input name="onscreen" type="radio" value="90"/>
+                    <span>90 дней</span>
+                  </label>
+                </p>
+              </div>
+              <p className = "hidden">123</p>
+                </div>
+          </div></center>
+
+
+
+          </div>
+
 
         <div className = "card yellow lighten-5">
 
@@ -706,317 +754,420 @@ export const CreatePage = () => {
               className="box-input"
               onChange = {changeHandler}
               value = {film.desc}
+              style = {{marginBottom:40}}
             /></center>
           </div>
 
         </div>
 
-          <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Режиссёр</p>
-                <center><input
-                  placeholder="Имя режиссера"
-                  id="director"
-                  type="text"
-                  name="director"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.director}
-                /></center>
+        <div className = "row">
 
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото режиссёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {dirchangeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "directorp" value={film.directorp = udiruri.sdiruri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {dirupload}>Загрузить фото</button>
+          <h5 className = "head center" style={{marginTop:50}}>Действующие лица</h5>
+
+
+            <div className = "scrolling-wrapper">
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Режиссёр</p>
+
+                    <center><img src = {film.directorp} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя режиссера"
+                      id="director"
+                      type="text"
+                      name="director"
+                      required
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.director}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className="center">Фото режиссёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {dirchangeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "directorp" value={film.directorp = udiruri.sdiruri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {dirupload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor1p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor1"
+                      type="text"
+                      name="actor1"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor1}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act1changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor1p = uact1uri.sact1uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act1upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor2p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor2"
+                      type="text"
+                      name="actor2"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor2}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act2changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor2p = uact2uri.sact2uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act2upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor3p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor3"
+                      type="text"
+                      name="actor3"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor3}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act3changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor3p" value={film.actor3p = uact3uri.sact3uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act3upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor4p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor4"
+                      type="text"
+                      name="actor4"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor4}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act4changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor4p" value={film.actor4p = uact4uri.sact4uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act4upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor5p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor5"
+                      type="text"
+                      name="actor5"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor5}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act5changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor5p = uact5uri.sact5uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act5upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor6p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor6"
+                      type="text"
+                      name="actor6"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor6}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act6changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor6p = uact6uri.sact6uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act6upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor7p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor7"
+                      type="text"
+                      name="actor7"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor7}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act7changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor7p = uact7uri.sact7uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act7upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor8p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor8"
+                      type="text"
+                      name="actor8"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor8}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act8changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor8p = uact8uri.sact8uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act8upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor9p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor9"
+                      type="text"
+                      name="actor9"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor9}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act9changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor9p = uact9uri.sact9uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act9upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div className = "fcard">
+              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+                  <div className="input-field">
+                    <p className="center">Актёр</p>
+
+                    <center><img src = {film.actor10p} className = "personimg" alt="       фото"></img></center>
+
+                    <center><input
+                      placeholder="Имя актёра"
+                      id="actor10"
+                      type="text"
+                      name="actor10"
+                      required
+
+                      className="box-input center"
+                      onChange = {changeHandler}
+                      value = {film.actor10}
+                    /></center>
+
+                    <div className="input-field">
+                      <p className = "center">Фото актёра</p>
+                      <center><input type="file" disabled={disabled.disable} onChange = {act10changeHandler} className = "box-input"/></center>
+                      <center><input type="text" hidden name = "actor1p" value={film.actor10p = uact10uri.sact10uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act10upload}>Загрузить фото</button></center>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
+        </div>
 
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor1"
-                  type="text"
-                  name="actor1"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor1}
-                /></center>
+        <div className = "row">
 
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act1changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor1p" value={film.actor1p = uact1uri.sact1uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act1upload}>Загрузить фото</button>
-                </div>
-              </div>
+        <div className = "col s12 m6 l6">
+          <div className = "green lighten-5 card">
+
+            <div className="input-field center">
+              <p>Баннер вертикальный</p>
+              <img src = {film.bannerver} style={{height:250, marginBottom:20}} alt="Баннер" className = "responsive-img"/>
+              <center><input type="file" disabled={disabled.disable} onChange = {bannerverchangeHandler} className = "box-input"/></center>
+              <center><input type="text" hidden name = "bannerver" value={film.bannerver = ubannerveruri.sbannerveruri} className = "box-input" onChange = {changeHandler}/></center>
+              <button disabled={disabled.disable} className="login1-btn center z-depth-1 " onClick = {bannerverupload}>Загрузить баннер</button>
             </div>
+          </div>
+        </div>
 
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+
+          <div className = "col s12 m6 l6">
+            <div className = "green lighten-5 card center">
               <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor2"
-                  type="text"
-                  name="actor2"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor2}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act2changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor2p" value={film.actor2p = uact2uri.sact2uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act2upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor3"
-                  type="text"
-                  name="actor3"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor3}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act3changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor3p" value={film.actor3p = uact3uri.sact3uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act3upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor4"
-                  type="text"
-                  name="actor4"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor4}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act4changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor4p" value={film.actor4p = uact4uri.sact4uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act4upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor5"
-                  type="text"
-                  name="actor5"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor5}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act5changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor5p" value={film.actor5p = uact5uri.sact5uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act5upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor6"
-                  type="text"
-                  name="actor6"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor6}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act6changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor6p" value={film.actor6p = uact6uri.sact6uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act6upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor7"
-                  type="text"
-                  name="actor7"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor7}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act7changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor7p" value={film.actor7p = uact7uri.sact7uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act7upload}>Загрузить фото</button>
-                </div>
-              </div>
-
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor8"
-                  type="text"
-                  name="actor8"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor8}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act8changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor8p" value={film.actor8p = uact8uri.sact8uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act8upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor9"
-                  type="text"
-                  name="actor9"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor9}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act9changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor9p" value={film.actor9p = uact9uri.sact9uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act9upload}>Загрузить фото</button>
-                </div>
-              </div>
-
-            </div>
-            <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
-
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Актёр</p>
-                <center><input
-                  placeholder="Имя актёра"
-                  id="actor10"
-                  type="text"
-                  name="actor10"
-                  required
-                  className="box-input"
-                  onChange = {changeHandler}
-                  value = {film.actor10}
-                /></center>
-
-                <div className="input-field">
-                  <p style={{marginLeft:50}}>Фото актёра</p>
-                  <center><input type="file" disabled={disabled.disable} onChange = {act10changeHandler} className = "box-input"/></center>
-                  <center><input type="text" hidden name = "actor10p" value={film.actor10p = uact10uri.sact10uri} className = "box-input" onChange = {changeHandler}/></center>
-                  <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act10upload}>Загрузить фото</button>
-                </div>
-              </div>
-            </div>
-
-          <div className = "card green lighten-5" style = {{padding:10, marginTop:10}}>
-            <h5 className = "head center">Загрузка данных</h5>
-
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Логотип фильма</p>
-                <center><input type="file" disabled={disabled.disable} onChange = {ulchangeHandler} className = "box-input"/></center>
-                <center><input type="text" hidden name = "filmlogo" value={film.filmlogo = ulogouri.slogouri} className = "box-input" onChange = {changeHandler}/></center>
-
-                <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {ulupload}>Загрузить логотип</button>
-              </div>
-
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Баннер горизонтальный</p>
+                <p>Баннер горизонтальный</p>
+                <img src = {film.bannerhor}style={{height:250, marginBottom:20}}  alt="Баннер" className="responsive-img"/>
                 <center><input type="file" disabled={disabled.disable}  onChange = {bannerhorchangeHandler} className = "box-input"/></center>
                 <center><input type="text" hidden  name = "bannerhor" value={film.bannerhor = ubannerhoruri.sbannerhoruri} className = "box-input" onChange = {changeHandler}/></center>
-                <button style={{marginLeft:50}} className="login1-btn center z-depth-1" disabled={disabled.disable} onClick = {bannerhorupload}>Загрузить баннер</button>
+                <button className="login1-btn center z-depth-1" disabled={disabled.disable} onClick = {bannerhorupload}>Загрузить баннер</button>
               </div>
 
-              <div className="input-field">
-                <p style={{marginLeft:50}}>Баннер вертикальный</p>
-                <center><input type="file" disabled={disabled.disable} onChange = {bannerverchangeHandler} className = "box-input"/></center>
-                <center><input type="text" hidden name = "bannerver" value={film.bannerver = ubannerveruri.sbannerveruri} className = "box-input" onChange = {changeHandler}/></center>
-                <button style={{marginLeft:50}} disabled={disabled.disable} className="login1-btn center z-depth-1 " onClick = {bannerverupload}>Загрузить баннер</button>
-              </div>
-
-
-              <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
-
-                <input type="text" name="filmuri" value = {film.filmuri = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} onChange = {changeHandler} hidden/>
-
-                <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
-
-                  <p style={{marginLeft:50}}>Фильм</p>
-                  <center><input type="file" name="file" className="box-input" /></center>
-                  <button style={{marginLeft:50}} type="submit" name="submit" className = "login1-btn z-depth-1">Загрузить фильм</button>
-
-              </form>
-
-              <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
-
-                <input type="text" name="trailer" value = {film.trailer = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} onChange = {changeHandler} hidden/>
-
-                <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
-
-                    <p style={{marginLeft:50}}>Трейлер</p>
-                    <center><input type="file" name="file" className="box-input" /></center>
-                    <button style={{marginLeft:50, marginBottom:20}} type="submit" name="submit" className = "login1-btn"  >Загрузить трейлер</button>
-
-              </form>
+            </div>
           </div>
+
+
+          <div className = "col s12">
+            <div className = "green lighten-5 card center">
+              <div className="input-field">
+                <p>Логотип фильма</p>
+                <img src = {film.filmlogo} style={{height:250,width:250, marginBottom:20}} alt="Логотип" className = "responsive-img"/>
+                <center><input type="file" disabled={disabled.disable} onChange = {ulchangeHandler} className = "box-input"/></center>
+                <center><input type="text" hidden name = "filmlogo" value={film.filmlogo = ulogouri.slogouri} className = "box-input" onChange = {changeHandler}/></center>
+                <button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {ulupload}>Загрузить логотип</button>
+                  <input type="text" name="trailer" value = {film.trailer = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} onChange = {changeHandler} hidden/>
+                  <input type="text" name="filmuri" value = {film.filmuri = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} onChange = {changeHandler} hidden/>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div className = "card green lighten-5" style = {{padding:10, marginTop:10}}>
+  <h5 className = "head center">Загрузка данных</h5>
+
+    <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
+
+
+      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
+
+          <p style={{marginLeft:50}}>Трейлер</p>
+          <center><input type="file" name="file" className="box-input" /></center>
+          <button style={{marginLeft:50, marginBottom:20}} type="submit" name="submit" className = "login1-btn"  >Загрузить трейлер</button>
+
+    </form>
+
+    <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
+
+
+      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
+
+          <p style={{marginLeft:50}}>Фильм</p>
+          <center><input type="file" name="file" className="box-input" /></center>
+          <button style={{marginLeft:50, marginBottom:20}} type="submit" name="submit" className = "login1-btn"  >Загрузить Фильм</button>
+
+    </form>
+</div>
+
+
+
+
+
+
+
+
 
           <div className = "center">
 

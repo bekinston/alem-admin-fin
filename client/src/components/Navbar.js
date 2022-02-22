@@ -15,8 +15,8 @@ export const Navbar = () => {
   return (
     <nav>
       <div className="nav-wrapper z-depth-0 black">
-        <span className="white-text brand-logo">älem</span>
-        <ul id=" nav-mobile" className="right hide-on-med-and-down">
+        <span className="white-text brand-logo left hide-on-med-and-down">älem</span>
+        <ul id=" nav-mobile" className="right">
           <li><NavLink to="/create">Создать фильм</NavLink></li>
           <li><NavLink to="/films">Мои фильмы</NavLink></li>
           <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
