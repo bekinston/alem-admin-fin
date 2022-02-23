@@ -15,7 +15,7 @@ export const AdminBar = () => {
   return (
     <nav>
       <div className="nav-wrapper black z-depth-0">
-        <span className="brand-logo left">älem</span>
+        <span className="brand-logo left" style={{marginLeft:30}}>älem</span>
         <ul id="nav-mobile" className="right">
           <li><NavLink to="/specs">Статиста</NavLink></li>
           <li><NavLink to="/app">Приложение</NavLink></li>

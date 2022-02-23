@@ -15,7 +15,7 @@ export const Navbar = () => {
   return (
     <nav>
       <div className="nav-wrapper z-depth-0 black">
-        <span className="white-text brand-logo left hide-on-med-and-down">älem</span>
+<span className="brand-logo left" style={{marginLeft:30}}>älem</span>
         <ul id=" nav-mobile" className="right">
           <li><NavLink to="/create">Создать фильм</NavLink></li>
           <li><NavLink to="/films">Мои фильмы</NavLink></li>
