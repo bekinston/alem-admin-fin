@@ -4,6 +4,7 @@ import {AuthContext} from '../context/AuthContext'
 import {useMessage} from '../hooks/message.hook'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
+import scr from '../images/specs/android.png'
 
 
 
@@ -44,7 +45,7 @@ export const CreatePage = () => {
   })
 
   const [udiruri, setUdiruri] = useState({
-    sdiruri:''
+    sdiruri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const dirchangeHandler = event => {
@@ -78,7 +79,7 @@ export const CreatePage = () => {
   })
 
   const [uact1uri, setUact1uri] = useState({
-    sact1uri:''
+    sact1uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act1changeHandler = event => {
@@ -112,7 +113,7 @@ export const CreatePage = () => {
   })
 
   const [uact2uri, setUact2uri] = useState({
-    sact2uri:''
+    sact2uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act2changeHandler = event => {
@@ -146,7 +147,7 @@ export const CreatePage = () => {
   })
 
   const [uact3uri, setUact3uri] = useState({
-    sact3uri:''
+    sact3uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act3changeHandler = event => {
@@ -180,7 +181,7 @@ export const CreatePage = () => {
   })
 
   const [uact4uri, setUact4uri] = useState({
-    sact4uri:''
+    sact4uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act4changeHandler = event => {
@@ -214,7 +215,7 @@ export const CreatePage = () => {
   })
 
   const [uact5uri, setUact5uri] = useState({
-    sact5uri:''
+    sact5uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act5changeHandler = event => {
@@ -248,7 +249,7 @@ export const CreatePage = () => {
   })
 
   const [uact6uri, setUact6uri] = useState({
-    sact6uri:''
+    sact6uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act6changeHandler = event => {
@@ -282,7 +283,7 @@ export const CreatePage = () => {
   })
 
   const [uact7uri, setUact7uri] = useState({
-    sact7uri:''
+    sact7uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act7changeHandler = event => {
@@ -316,7 +317,7 @@ export const CreatePage = () => {
   })
 
   const [uact8uri, setUact8uri] = useState({
-    sact8uri:''
+    sact8uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act8changeHandler = event => {
@@ -350,7 +351,7 @@ export const CreatePage = () => {
   })
 
   const [uact9uri, setUact9uri] = useState({
-    sact9uri:''
+    sact9uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const act9changeHandler = event => {
@@ -385,7 +386,7 @@ export const CreatePage = () => {
     })
 
     const [uact10uri, setUact10uri] = useState({
-      sact10uri:''
+      sact10uri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
     })
 
     const act10changeHandler = event => {
@@ -420,7 +421,7 @@ export const CreatePage = () => {
   })
 
   const [ulogouri, setUlogouri] = useState({
-    slogouri:''
+    slogouri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const ulchangeHandler = event => {
@@ -454,7 +455,7 @@ export const CreatePage = () => {
   })
 
   const [ubannerveruri, setUbannerveruri] = useState({
-    sbannerveruri:''
+    sbannerveruri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const bannerverchangeHandler = event => {
@@ -488,7 +489,7 @@ export const CreatePage = () => {
   })
 
   const [ubannerhoruri, setUbannerhoruri] = useState({
-    sbannerhoruri:''
+    sbannerhoruri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
   })
 
   const bannerhorchangeHandler = event => {
@@ -575,10 +576,21 @@ export const CreatePage = () => {
   const pressHandler = async()=> {
     try {
 
+      if(film.onscreen == '' || film.name == '' || film.year == ''
+                              || film.country == '' || film.genres == ''
+                               || film.time == '' || film.desc == ''
+                                || film.filmlogo == 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg' || film.bannerhor == 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
+                                  || film.bannerver == 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg' || film.director == ''
+                                    || film.directorp == 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg' || film.actor1 == ''
+                                      || film.actor1p == 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'){
+        message('Заполните все поля')
+      }else{
         const data = await request('/api/film/generate', 'POST', {...film}, {Authorization:`Bearer ${auth.token}`})
         message(data.message)
-
         navigate('/films')
+      }
+
+
 
 
     } catch (e) {
@@ -596,7 +608,11 @@ export const CreatePage = () => {
 
 
 
+  const [disablep, setDisablep] = useState({sdisaplep:false})
 
+  const setDisablec = () => {
+
+  }
 
 
 
@@ -611,7 +627,7 @@ export const CreatePage = () => {
           <p className = "center">* Для создания фильма заполните все поля последовательно</p>
         </div>
 
-        <div className = "card yellow lighten-5">
+        <div className = "card cards" style={{borderRadius:10}}>
 
           <h5 className = "head center">Путь на диск</h5>
 
@@ -635,7 +651,7 @@ export const CreatePage = () => {
 
         </div>
 
-        <div className = "card yellow lighten-5 center">
+        <div className = "card cards">
 
           <h5 className = "head center">Количество дней в прокате</h5>
 
@@ -646,8 +662,8 @@ export const CreatePage = () => {
               <div className = "radio1">
                 <p style = {{width:300}}>
                   <label>
-                    <input className = "input" name="onscreen" type="radio" value="45"/>
-                    <span>45 дней</span>
+                    <input  name="onscreen" type="radio" value="45"/>
+                    <span className = "radio">45 дней</span>
                   </label>
                 </p>
               </div>
@@ -656,7 +672,7 @@ export const CreatePage = () => {
                 <p>
                   <label>
                     <input name="onscreen" type="radio" value="90"/>
-                    <span>90 дней</span>
+                    <span className = "radio">90 дней</span>
                   </label>
                 </p>
               </div>
@@ -669,7 +685,7 @@ export const CreatePage = () => {
           </div>
 
 
-        <div className = "card yellow lighten-5">
+        <div className = "card cards">
 
           <h5 className = "head center">Основные данные</h5>
 
@@ -763,18 +779,19 @@ export const CreatePage = () => {
         <div className = "row">
 
           <h5 className = "head center" style={{marginTop:50}}>Действующие лица</h5>
+          <p className = "center" style = {{marginTop:25}}>Рекомендуемый размер: 512 x 512</p>
 
 
             <div className = "scrolling-wrapper">
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Режиссёр</p>
 
-                    <center><img src = {film.directorp} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {udiruri.sdiruri} className = "personimg"/></center>
 
                     <center><input
-                      placeholder="Имя режиссера"
+                      placeholder="Имя Фамилия"
                       id="director"
                       type="text"
                       name="director"
@@ -788,21 +805,21 @@ export const CreatePage = () => {
                       <p className="center">Фото режиссёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {dirchangeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "directorp" value={film.directorp = udiruri.sdiruri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {dirupload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {dirupload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor1p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact1uri.sact1uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor1"
                       type="text"
                       name="actor1"
@@ -817,21 +834,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act1changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor1p = uact1uri.sact1uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act1upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act1upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor2p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact2uri.sact2uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor2"
                       type="text"
                       name="actor2"
@@ -846,21 +863,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act2changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor2p = uact2uri.sact2uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act2upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act2upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor3p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact3uri.sact3uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor3"
                       type="text"
                       name="actor3"
@@ -875,21 +892,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act3changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor3p" value={film.actor3p = uact3uri.sact3uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act3upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act3upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor4p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact4uri.sact4uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor4"
                       type="text"
                       name="actor4"
@@ -904,21 +921,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act4changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor4p" value={film.actor4p = uact4uri.sact4uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act4upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act4upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor5p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact5uri.sact5uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor5"
                       type="text"
                       name="actor5"
@@ -933,21 +950,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act5changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor5p = uact5uri.sact5uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act5upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act5upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor6p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact6uri.sact6uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor6"
                       type="text"
                       name="actor6"
@@ -962,21 +979,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act6changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor6p = uact6uri.sact6uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act6upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act6upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor7p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact7uri.sact7uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor7"
                       type="text"
                       name="actor7"
@@ -991,21 +1008,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act7changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor7p = uact7uri.sact7uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act7upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act7upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor8p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact8uri.sact8uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor8"
                       type="text"
                       name="actor8"
@@ -1020,21 +1037,21 @@ export const CreatePage = () => {
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act8changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor8p = uact8uri.sact8uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act8upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act8upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor9p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact9uri.sact9uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor9"
                       type="text"
                       name="actor9"
@@ -1042,28 +1059,27 @@ export const CreatePage = () => {
 
                       className="box-input center"
                       onChange = {changeHandler}
-                      value = {film.actor9}
-                    /></center>
+                      value = {film.actor9}/></center>
 
                     <div className="input-field">
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act9changeHandler} className = "box-input"/></center>
                       <center><input type="text" hidden name = "actor1p" value={film.actor9p = uact9uri.sact9uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act9upload}>Загрузить фото</button></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act9upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
             </div>
 
             <div className = "fcard">
-              <div className = "card yellow lighten-5" style = {{padding:10, marginTop:10}}>
+              <div className = "card cards1" style = {{padding:10, marginTop:10}}>
                   <div className="input-field">
                     <p className="center">Актёр</p>
 
-                    <center><img src = {film.actor10p} className = "personimg" alt="       фото"></img></center>
+                    <center><img src = {uact10uri.sact10uri} className = "personimg"></img></center>
 
                     <center><input
-                      placeholder="Имя актёра"
+                      placeholder="Имя Фамилия"
                       id="actor10"
                       type="text"
                       name="actor10"
@@ -1077,8 +1093,8 @@ export const CreatePage = () => {
                     <div className="input-field">
                       <p className = "center">Фото актёра</p>
                       <center><input type="file" disabled={disabled.disable} onChange = {act10changeHandler} className = "box-input"/></center>
-                      <center><input type="text" hidden name = "actor1p" value={film.actor10p = uact10uri.sact10uri} className = "box-input" onChange = {changeHandler}/></center>
-                      <center><button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {act10upload}>Загрузить фото</button></center>
+                      <center><input type="text" hidden name = "actor10p" value={film.actor10p = uact10uri.sact10uri} className = "box-input" onChange = {changeHandler}/></center>
+                      <center><button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {act10upload}>Загрузить фото</button></center>
                     </div>
                   </div>
                 </div>
@@ -1090,27 +1106,29 @@ export const CreatePage = () => {
         <div className = "row">
 
         <div className = "col s12 m6 l6">
-          <div className = "green lighten-5 card">
+          <div className = "cardu card center">
 
             <div className="input-field center">
-              <p>Баннер вертикальный</p>
-              <img src = {film.bannerver} style={{height:250, marginBottom:20}} alt="Баннер" className = "responsive-img"/>
-              <center><input type="file" disabled={disabled.disable} onChange = {bannerverchangeHandler} className = "box-input"/></center>
+              <p className = "phead">Баннер вертикальный</p>
+              <p>Рекомендуемый размер: 1080 x 1920</p>
+              <img src = {ubannerveruri.sbannerveruri} style={{height:250,width:170, marginBottom:20}} className = "responsive-img bannerimg"/>
+              <center><input type="file" disabled={disabled.disable} onChange = {bannerverchangeHandler} className = "box-input" style ={{marginTop:25}}/></center>
               <center><input type="text" hidden name = "bannerver" value={film.bannerver = ubannerveruri.sbannerveruri} className = "box-input" onChange = {changeHandler}/></center>
-              <button disabled={disabled.disable} className="login1-btn center z-depth-1 " onClick = {bannerverupload}>Загрузить баннер</button>
+              <button disabled={disabled.disable} className="loginu-btn center z-depth-1 " onClick = {bannerverupload}>Загрузить баннер</button>
             </div>
           </div>
         </div>
 
 
           <div className = "col s12 m6 l6">
-            <div className = "green lighten-5 card center">
+            <div className = "cardu card center">
               <div className="input-field">
-                <p>Баннер горизонтальный</p>
-                <img src = {film.bannerhor}style={{height:250, marginBottom:20}}  alt="Баннер" className="responsive-img"/>
-                <center><input type="file" disabled={disabled.disable}  onChange = {bannerhorchangeHandler} className = "box-input"/></center>
+                <p className = "phead">Баннер горизонтальный</p>
+                <p>Рекомендуемый размер: 1920 x 1080</p>
+                <img src = {ubannerhoruri.sbannerhoruri}style={{height:250, marginBottom:20}}  alt="Баннер" className="responsive-img bannerimg"/>
+                <center><input type="file" disabled={disabled.disable}  onChange = {bannerhorchangeHandler} className = "box-input" style ={{marginTop:25}}/></center>
                 <center><input type="text" hidden  name = "bannerhor" value={film.bannerhor = ubannerhoruri.sbannerhoruri} className = "box-input" onChange = {changeHandler}/></center>
-                <button className="login1-btn center z-depth-1" disabled={disabled.disable} onClick = {bannerhorupload}>Загрузить баннер</button>
+                <button className="loginu-btn center z-depth-1" disabled={disabled.disable} onClick = {bannerhorupload}>Загрузить баннер</button>
               </div>
 
             </div>
@@ -1118,13 +1136,14 @@ export const CreatePage = () => {
 
 
           <div className = "col s12">
-            <div className = "green lighten-5 card center">
+            <div className = "cardu card center">
               <div className="input-field">
-                <p>Логотип фильма</p>
-                <img src = {film.filmlogo} style={{height:250,width:250, marginBottom:20}} alt="Логотип" className = "responsive-img"/>
-                <center><input type="file" disabled={disabled.disable} onChange = {ulchangeHandler} className = "box-input"/></center>
+                <p className = "phead">Логотип фильма</p>
+                <p>Рекомендуемый размер: 1024 x 1024</p>
+                <img src = {ulogouri.slogouri} style={{height:250,width:250, marginBottom:20}} alt="Логотип" className = "responsive-img bannerimg"/>
+                <center><input type="file" disabled={disabled.disable} onChange = {ulchangeHandler} className = "box-inp1" /></center>
                 <center><input type="text" hidden name = "filmlogo" value={film.filmlogo = ulogouri.slogouri} className = "box-input" onChange = {changeHandler}/></center>
-                <button disabled={disabled.disable} className="login1-btn center z-depth-1 center" onClick = {ulupload}>Загрузить логотип</button>
+                <button disabled={disabled.disable} className="loginu-btn center z-depth-1 center" onClick = {ulupload} style={{marginBottom:20}}>Загрузить логотип</button>
                   <input type="text" name="trailer" value = {film.trailer = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} onChange = {changeHandler} hidden/>
                   <input type="text" name="filmuri" value = {film.filmuri = 'https://storage.yandexcloud.net/alemuploads/' + dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} onChange = {changeHandler} hidden/>
 
@@ -1133,33 +1152,50 @@ export const CreatePage = () => {
             </div>
           </div>
 
+          <div className = "col s12 m6 l6">
+            <div className = "cardu card center">
+
+              <div className="input-field center">
+                <p className = "phead">Трейлер</p>
+                <p>формат файла .mp4</p>
+                  <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
+
+
+                    <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
+                    <center><input type="file" name="file" className="box-input" /></center>
+                    <button type="submit" name="submit" className="loginu-btn center z-depth-1 " >Загрузить трейлер</button>
+
+                  </form>
+              </div>
+            </div>
+          </div>
+
+
+            <div className = "col s12 m6 l6">
+              <div className = "cardu card center">
+                <div className="input-field">
+                  <p className = "phead">Фильм</p>
+                  <p>формат файла .mp4</p>
+                    <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
+
+
+                      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
+                          <center><input type="file" name="file" className="box-input" /></center>
+                          <center><button type="submit" name="submit" className = "loginu-btn center z-depth-1"  >Загрузить Фильм</button></center>
+                    </form>
+                </div>
+
+              </div>
+            </div>
+
+
+
         </div>
 
-        <div className = "card green lighten-5" style = {{padding:10, marginTop:10}}>
-  <h5 className = "head center">Загрузка данных</h5>
-
-    <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
+        <div className = "row">
 
 
-      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
-
-          <p style={{marginLeft:50}}>Трейлер</p>
-          <center><input type="file" name="file" className="box-input" /></center>
-          <button style={{marginLeft:50, marginBottom:20}} type="submit" name="submit" className = "login1-btn"  >Загрузить трейлер</button>
-
-    </form>
-
-    <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
-
-
-      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
-
-          <p style={{marginLeft:50}}>Фильм</p>
-          <center><input type="file" name="file" className="box-input" /></center>
-          <button style={{marginLeft:50, marginBottom:20}} type="submit" name="submit" className = "login1-btn"  >Загрузить Фильм</button>
-
-    </form>
-</div>
+        </div>
 
 
 
@@ -1171,7 +1207,7 @@ export const CreatePage = () => {
 
           <div className = "center">
 
-            <button onClick={pressHandler} className="login1-btn center z-depth-1 center">Создать</button>
+            <button onClick={pressHandler} className="loginm-btn center z-depth-1 center" style = {{marginBottom:40}} disabled={disablep.setDisablep}>Загрузить фильм</button>
 
           </div>
 

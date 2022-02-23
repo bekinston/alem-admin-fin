@@ -19,7 +19,6 @@ export const NSoonList= ({ users }) => {
           <div className = "card green lighten-5">
             <div style={{padding:15}}>
               <p style={{marginTop:20}} className="left pcalc">Блоки «интересное»</p>
-              <button className = "z-depth-1 login1-btn right">Обновить</button>
             </div>
 
 
@@ -27,7 +26,7 @@ export const NSoonList= ({ users }) => {
                 { users.map((user, index) => {
                     return (
                       <>
-                        <div className = "fcard z-depth-1">
+                        <div className = "fcard1 z-depth-1">
                           <img src = {user.photo} className="responsive-img banner center"/>
                           <p className="center">{user.name}</p>
                           <div className="green lighten-5 center" style={{padding:10}}>
@@ -39,8 +38,8 @@ export const NSoonList= ({ users }) => {
                             <button className="login1-btn z-depth-1" style={{margin:20}} onClick={
 
                                 async()=>{
-                                  const n = user.name
-                                  const data = await request('/api/soon/deletesoon', 'POST', {name:n})
+                                  const n = user.photo
+                                  const data = await request('/api/soon/deletesoon', 'POST', {photo:n})
                                   message(data.message)
                                   window.location.reload(false)
                                 }

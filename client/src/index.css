@@ -1,7 +1,25 @@
 @import "~materialize-css/dist/css/materialize.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
 div.fcard{
+  background: white;
+  border-radius: 10px;
+  min-width: 250px;
+  max-width: 250px;
+  padding: 10px;
+
+
+}
+
+img.images{
+
+  border: 1px solid black;
+}
+
+div.fscard{
+  margin: 10px;
+}
+
+div.fcard1{
   background: white;
   border-radius: 10px;
   min-width: 250px;
@@ -21,7 +39,7 @@ div.scrolling-wrapper{
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  margin:20px;
+  margin:5px;
 }
 
 
@@ -42,6 +60,11 @@ input.box-input{
   width: 90% !important;
 }
 
+input.box-input::placeholder{
+  color: black;
+  opacity: 0.4;
+}
+
 input.box-input1{
 
   border-radius: 5px !important;
@@ -50,8 +73,18 @@ input.box-input1{
 }
 
 div.container{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
 
+}
+
+div.cards{
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+div.cards1{
+  background: #bbdefb;
+  border-radius: 10px;
 }
 
 div.modal{
@@ -173,6 +206,33 @@ button.login1-btn:hover{
 }
 
 button.login1-btn:focus{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+button.loginu-btn{
+  margin-top: 40px;
+  border-radius: 7px;
+  color: black;
+  background: white;
+  font-weight: 700;
+  font-size: 13px;
+
+  padding: 10px 20px;
+  border: 1px solid white;
+
+}
+
+button.loginu-btn:hover{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+button.loginu-btn:focus{
   background: white;
   color:black;
   border: 1px solid black;
@@ -334,18 +394,70 @@ div.radio2{
   float: left;
 }
 
-
+p.phead{
+  font-size: 24px;
+  margin: 0px;
+}
 
 p.hidden{
   color: transparent;
 }
 
 img.personimg{
+  z-index: 2;
+  outline:none;
   margin-bottom: 20px;
   height: 100px;
   width: 100px;
   border-radius: 50px;
-  border: 1px solid cyan;
+  border: 0px solid cyan;
+
   text-align: center;
   background: white;
+}
+
+img.bannerimg{
+  margin-top: 5px;
+}
+
+div.cardu{
+  background: #c1d5e0;
+  border-radius: 10px;
+}
+
+input.box-inp1{
+  border:1px solid grey !important;
+  border-radius: 5px !important;
+  padding: 5px !important;
+  width: 40% !important;
+}
+
+button.loginm-btn{
+  margin-top: 10px;
+  border-radius: 7px;
+  color: black;
+  background: white;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: 1px solid white;
+
+}
+
+button.loginm-btn:hover{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+button.loginm-btn:focus{
+  background: white;
+  color:black;
+  border: 1px solid black;
+
+}
+
+span.radio{
+  color:black;
 }

@@ -12,10 +12,10 @@ export const SpecsPage = () => {
     <>
     <div className = "row">
 
-      <div className = "col s12 offset-s1">
-        <div className = "col s2">
+
+        <div className = "col s2 offset-s1">
           <div className = "card center">
-            <h5 className = "head">Android</h5>
+            <h6>Android</h6>
             <img className = "responsive-img" src = {android} style = {{width:50}}/>
             <p>Скачано: 0</p>
           </div>
@@ -23,7 +23,7 @@ export const SpecsPage = () => {
 
         <div className = "col s2">
           <div className = "card center">
-            <h5 className = "head">IOS</h5>
+            <h6>IOS</h6>
 
             <img className = "responsive-img" src = {apple} style = {{width:50}}/>
               <p>Скачано: 0</p>
@@ -32,7 +32,7 @@ export const SpecsPage = () => {
 
         <div className = "col s2">
           <div className = "card center">
-            <h5 className = "head">AppleTV</h5>
+            <h6>AppleTV</h6>
 
             <img className = "responsive-img" src = {appletv} style = {{width:50}}/>
 
@@ -42,7 +42,7 @@ export const SpecsPage = () => {
 
         <div className = "col s2">
           <div className = "card center">
-            <h5 className = "head">AndroidTV</h5>
+            <h6>AndroidTV</h6>
 
             <img className = "responsive-img" src = {androidtv} style = {{width:50}}/>
 
@@ -52,21 +52,16 @@ export const SpecsPage = () => {
 
         <div className = "col s2">
           <div className = "card center">
-            <h5 className = "head">TV</h5>
+            <h6>SmartTV</h6>
 
             <img className = "responsive-img" src = {tv} style = {{width:50}}/>
 
               <p>Скачано: 0</p>
           </div>
         </div>
-      </div>
 
-      <div className = "col s10 offset-s1">
-        <div className = "card" style = {{padding:30}}>
-          <h5 className = "head">Заявки на вывод денег</h5>
-          <Pay/>
-        </div>
-      </div>
+
+
 
       <div className = "col s10 offset-s1">
         <div className = "card" style = {{padding:30}}>

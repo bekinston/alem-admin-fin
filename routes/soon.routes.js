@@ -4,10 +4,10 @@ const router = Router()
 
 router.post('/deletesoon', async (req, res) => {
   try {
-    const {name} = req.body
+    const {photo} = req.body
 
 
-    const go = await Soon.updateOne({name}, {$set: {state : "zero"}})
+    const go = await Soon.updateOne({photo}, {$set: {state : "zero"}})
 
     res.status(201).json({ message:'Интересное удалено' })
   } catch (e) {
@@ -19,22 +19,6 @@ router.post('/addsoon', async (req, res) => {
   try {
     const {name, date, photo, desc} = req.body
 
-
-    if(name.length === 0){
-      return res.json({message:'Введите название'})
-    }
-
-    if(date.length === 0){
-      return res.json({message:'Введите дату'})
-    }
-
-    if(photo.length === 0){
-      return res.json({message:'Введите фото'})
-    }
-
-    if(desc.length === 0){
-      return res.json({message:'Введите описание'})
-    }
 
     const go = new Soon({name, date, photo, desc, state:"go"})
 

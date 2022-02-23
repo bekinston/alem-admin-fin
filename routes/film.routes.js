@@ -37,7 +37,7 @@ router.post('/generate', auth, async (req, res) => {
       actor7, actor7p,
       actor8, actor8p,
       actor9, actor9p,
-      actor10, actor10p, promo:'none', state:'zero',cost: 0, owner: req.user.userId})
+      actor10, actor10p, promo:'none', state:'zero',cost: 0, owner: req.user.userId, enddate:'01.01.1970'})
 
     film.save()
 

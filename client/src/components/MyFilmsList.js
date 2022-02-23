@@ -14,20 +14,34 @@ export const MyFilmsList = ({ users }) => {
               let cost = parseInt(user.cost)
               let buys = parseInt(user.buys)
 
-              var nDate =(user.enddate).split('.')
+              let fdate = (user.enddate)
+              let sfdate = (user.startdate)
+
+              let xdate = ''
+
+              if (fdate == '01.01.1970'){
+                xdate = '-'
+              }else(
+                xdate = fdate
+              )
+
+              var nDate = fdate.split('.')
               var nMonth = nDate[1]
               var nDays = nDate[0]
               var nYear = nDate[2]
-
-
-
 
               let source = new Date(nYear, nMonth-1 ,nDays)
               let current = new Date()
 
               var daysLag = Math.ceil(Math.abs(current.getTime() - source.getTime()) / (1000 * 3600 * 24))
-              
 
+              let xday = ''
+
+              if(daysLag > 90){
+                 xday = "-"
+              }else{
+                 xday = daysLag.toString()
+              }
 
 
 
@@ -45,8 +59,8 @@ export const MyFilmsList = ({ users }) => {
 
                     <img src = {user.bannerhor} className="responsive-img"/>
                     <p className = "efilms"><span className="hfilms">Дата начала проката: </span> {user.startdate}</p>
-                    <p className = "efilms"><span className="hfilms">Дата конца проката: </span>{user.enddate}</p>
-                    <p className = "efilms"><span className="hfilms">Осталось дней: </span> {daysLag}</p>
+                    <p className = "efilms"><span className="hfilms">Дата конца проката: </span>{xdate}</p>
+                    <p className = "efilms"><span className="hfilms">Осталось дней: </span>{xday}</p>
                   </div>
 
 

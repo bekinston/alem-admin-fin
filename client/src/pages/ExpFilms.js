@@ -65,16 +65,16 @@ export const ExpFilms = () =>{
 
     return(
       <div className = "row">
-      <div className = "col s10 offset-s1 " style = {{marginTop:20}}>
 
-      <div className = "col s5 card  red lighten-5 ">
+
+      <div className = "col s5 offset-s1 fscard card  grey lighten-5 ">
         <center><p>Ожидающие фильмы</p></center>
         <div className = "scard">
         <FilmTableList/>
         </div>
       </div>
 
-      <div className = "col s5 offset-s2  card red lighten-5">
+      <div className = "col s5 card fscard grey lighten-5">
 
         <center><p>Фильмы в прокате</p></center>
         <div className = "scard">
@@ -82,7 +82,7 @@ export const ExpFilms = () =>{
         </div>
       </div>
 
-      </div>
+
 
 
         <div className = "col s10 offset-s1 center" style={{ marginTop:20}}>
