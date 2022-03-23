@@ -24,7 +24,7 @@ router.post('/send',function(req,res){
 
     // send mail with defined transport object
     var mailOptions={
-        to: email,
+        to: 'bekt884@gmail.com',
         subject: "Otp for registration is: ",
         html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
     };
