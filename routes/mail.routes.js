@@ -22,7 +22,7 @@ let transporter = nodemailer.createTransport({
 router.post('/send',function(req,res){
     const {email} = req.body;
 
-    res.status(201).send({message:email})
+    res.status(201).json({email})
     // send mail with defined transport object
     /*
     var mailOptions={
