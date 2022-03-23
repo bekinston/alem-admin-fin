@@ -19,10 +19,15 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send',function(req,res){
-    const {email} = req.body;
+router.post('/send', async function(req,res){
+    try{
+        const {email} = req.body;
 
-    res.status(201).json({email})
+        res.status(201).json({email})
+    }catch (e) {
+        res.status(500).json({'noooooo.....'})
+    }
+
     // send mail with defined transport object
     /*
     var mailOptions={
