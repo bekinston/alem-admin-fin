@@ -22,11 +22,11 @@ let transporter = nodemailer.createTransport({
 });
 
 router.post('/send',function(req,res){
-    email=req.body.email;
+    const email = req.body;
 
     // send mail with defined transport object
     var mailOptions={
-        to: req.body.email,
+        to: email,
         subject: "Otp for registration is: ",
         html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
     };
