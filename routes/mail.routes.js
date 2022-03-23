@@ -10,13 +10,11 @@ console.log(otp);
 
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    service : 'Gmail',
-
+    port: 587,
+    secure: false,
     auth: {
-        user: 'bekt884@gmail.com',
-        pass: 'Mydick99',
+        user: 'tony.buckridge9@ethereal.email',
+        pass: 'ZWmPQamddphaCpjwFT',
     }
 
 });
