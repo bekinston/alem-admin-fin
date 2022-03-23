@@ -7,7 +7,7 @@ const app = express()
 
 const PORT = config.get('port') || 8080
 
-app.use(express.json({extended:true}))
+app.use(express.json({}))
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/go', require('./routes/go.routes'))
