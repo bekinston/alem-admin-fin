@@ -23,9 +23,9 @@ router.post('/send', async function(req,res){
     try{
         const {email} = req.body;
 
-        res.status(201).json({email})
+        res.status(201).json({message:'message'+ email})
     }catch (e) {
-        res.status(500).json({'noooooo.....'})
+        res.status(500).json({message:'noooooo.....'})
     }
 
     // send mail with defined transport object
