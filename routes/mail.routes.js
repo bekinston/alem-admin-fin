@@ -20,9 +20,11 @@ let transporter = nodemailer.createTransport({
 });
 
 router.post('/send',function(req,res){
-    const email = req.body.email;
+    const {email} = req.body;
 
+    res.status(201).send({message:email})
     // send mail with defined transport object
+    /*
     var mailOptions={
         to: email,
         subject: "Otp for registration is: ",
@@ -37,7 +39,7 @@ router.post('/send',function(req,res){
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         res.status(201).send({message: otp})
 
-    });
+    });*/
 });
 
 router.post('/verify',function(req,res){
