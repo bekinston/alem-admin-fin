@@ -9,7 +9,7 @@ otp = parseInt(otp);
 console.log(otp);
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp.ethereal.email",
     port: 587,
     secure: false,
     auth: {
