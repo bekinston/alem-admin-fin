@@ -21,24 +21,15 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send',function(req,res){
-    const email = req.body;
+router.post('/send',async function(req,res){
+    try{
+        const email = req.body
+        res.status(201).send({message:"привет" + email});
+    }catch (e) {
+        res.status(201).send({message:"привет" + " не удалось"});
 
-    // send mail with defined transport object
-    var mailOptions={
-        to: email,
-        subject: "Otp for registration is: ",
-        html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
-    };
+    }
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-    });
 });
 
 router.post('/verify',function(req,res){
