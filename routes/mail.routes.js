@@ -22,6 +22,7 @@ let transporter = nodemailer.createTransport({
 router.post('/send', async function(req,res){
     try{
         const {email} = req.body;
+        console.log(email)
 
         res.status(201).json({message:'message'+ email})
     }catch (e) {
