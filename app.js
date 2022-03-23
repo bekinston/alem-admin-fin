@@ -15,6 +15,7 @@ app.use('/api/telegram', require('./routes/telegram.routes'))
 app.use('/api/soon', require('./routes/soon.routes'))
 app.use('/api/pay', require('./routes/pay.routes'))
 app.use('/api/upload', require('./routes/upload.routes'))
+app.use('/api/mail', require('./routes/mail.routes'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')))

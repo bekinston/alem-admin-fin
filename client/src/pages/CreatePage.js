@@ -1160,8 +1160,7 @@ export const CreatePage = () => {
                 <p>формат файла .mp4</p>
                   <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
 
-
-                    <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
+                    <input type="input" name="key" value = {dirname.urlfilm +"/" + dirname.urlfilm + 'trailer.mp4'} hidden />
                     <center><input type="file" name="file" className="box-input" /></center>
                     <button type="submit" name="submit" className="loginu-btn center z-depth-1 " >Загрузить трейлер</button>
 
@@ -1179,7 +1178,7 @@ export const CreatePage = () => {
                     <form action="https://storage.yandexcloud.net/alemuploads/" method="post" encType="multipart/form-data">
 
 
-                      <input type="input" name="key" value = {+ dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
+                      <input type="input" name="key" value = {dirname.urlfilm +"/" + dirname.urlfilm + 'film.mp4'} hidden />
                           <center><input type="file" name="file" className="box-input" /></center>
                           <center><button type="submit" name="submit" className = "loginu-btn center z-depth-1"  >Загрузить Фильм</button></center>
                     </form>
