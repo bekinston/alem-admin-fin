@@ -23,7 +23,7 @@ router.post('/send', async(req,res)=>{
         const {email} = req.body
 
         let otp = Math.random();
-        otp = otp * 1000;
+        otp = otp * 1000000;
         otp = parseInt(otp);
 
         const code = new Code({email, code:otp})
