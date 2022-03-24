@@ -44,7 +44,7 @@ router.post('/send', jsonParser, async(req,res)=>{
                 return console.log(error);
             }*/
             res.status(201).json({message: 'message' + email});
-        })
+
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
     }
