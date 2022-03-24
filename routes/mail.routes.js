@@ -18,7 +18,7 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send', async function(req,res){
+router.post('/send', async(req,res)=>{
     try{
         const {email} = req.body
 
@@ -30,18 +30,16 @@ router.post('/send', async function(req,res){
         code.save()
 
         var mailOptions={
-            to: email,
+            to: 'bekt884@gmail.com',
             subject: "Otp for registration is: ",
             html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
+        await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
-
-        res.status(201).json({message:'message'+ email});
-
+            res.status(201).json({message: 'message' + email});
         })
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
