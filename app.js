@@ -8,7 +8,6 @@ const app = express()
 
 const PORT = config.get('port') || 8080
 
-app.use(express.json({}))
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
