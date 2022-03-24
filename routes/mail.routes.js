@@ -23,7 +23,7 @@ let transporter = nodemailer.createTransport({
 router.post('/send', jsonParser, async(req,res)=>{
     try{
 
-        const {email} = JSON.stringify(req.body)
+        const {email} = req.body
         /*const {email} = JSON.stringify(req.body)
 
         let otp = Math.random();
