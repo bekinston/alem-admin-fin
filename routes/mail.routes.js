@@ -24,7 +24,6 @@ router.post('/send',  async(req,res)=>{
     try{
 
         const {email} = req.body
-        /*const {email} = JSON.stringify(req.body)
 
         let otp = Math.random();
         otp = otp * 1000000;
@@ -42,10 +41,11 @@ router.post('/send',  async(req,res)=>{
         await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
-            }*/
+            }
             res.status(201).json({message: 'message' + email});
 
-    }catch (e) {
+            }
+        )}catch (e) {
         res.status(500).json({message:'noooooo.....'});
     }
     // send mail with defined transport object
