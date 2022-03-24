@@ -39,7 +39,7 @@ router.post('/send', async(req,res)=>{
             if (error) {
                 return console.log(error);
             }
-            res.status(201).json({message: 'message' + email});
+            res.status(201).json({message: 'message' + otp});
         })
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
