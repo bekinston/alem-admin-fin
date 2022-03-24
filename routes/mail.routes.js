@@ -1,6 +1,8 @@
 const {Router} = require('express')
 const nodemailer=require('nodemailer')
 const Code = require('../models/Code')
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json();
 
 
 const router = Router()
@@ -18,9 +20,9 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send', async(req,res)=>{
+router.post('/send', jsonParser, async(req,res)=>{
     try{
-        const {email} = req.body
+        const {email} = JSON.stringify(req.body)
 
         let otp = Math.random();
         otp = otp * 1000000;
