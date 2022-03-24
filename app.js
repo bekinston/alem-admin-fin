@@ -1,6 +1,7 @@
 const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
+const bp = require('body-parser')
 const path = require('path')
 
 const app = express()
@@ -8,6 +9,8 @@ const app = express()
 const PORT = config.get('port') || 8080
 
 app.use(express.json({}))
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/go', require('./routes/go.routes'))
