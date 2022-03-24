@@ -10,9 +10,9 @@ const router = Router()
 
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
+    host: "smtp.yandex.ru",
+    port: 465,
+    secure: true,
     auth: {
         user: 'bekt884@yandex.kz',
         pass: 'Mydick99',
