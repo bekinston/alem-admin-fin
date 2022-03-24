@@ -29,10 +29,10 @@ router.post('/send', async(req,res)=>{
         const code = new Code({email, code:otp})
         code.save()
 
-        var mailOptions={
-            to: 'bekt884@gmail.com',
+        const mailOptions = {
+            to: email,
             subject: "Otp for registration is: ",
-            html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
+            html: "<h3>OTP for account verification is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
 
         await transporter.sendMail(mailOptions, (error, info) => {
