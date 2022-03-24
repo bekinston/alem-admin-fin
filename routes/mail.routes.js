@@ -20,7 +20,7 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send', jsonParser, async(req,res)=>{
+router.post('/send',  async(req,res)=>{
     try{
 
         const {email} = req.body
