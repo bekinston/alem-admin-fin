@@ -40,11 +40,12 @@ router.post('/send', async function(req,res){
                 return console.log(error);
             }
 
-        res.status(201).json({message:'message'+ email})
-    }catch (e) {
-        res.status(500).json({message:'noooooo.....'})
-    }
+        res.status(201).json({message:'message'+ email});
 
+        })
+    }catch (e) {
+        res.status(500).json({message:'noooooo.....'});
+    }
     // send mail with defined transport object
     /*
 
