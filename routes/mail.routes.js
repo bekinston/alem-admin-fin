@@ -10,7 +10,7 @@ const router = Router()
 
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.yandex.ru",
+    host: "smtp.google.com",
     port: 465,
     secure: true,
     auth: {
