@@ -60,11 +60,13 @@ router.post('/verify',  async(req,res)=>{
     try {
         const {otp} = req.body
 
-        const existing = await Code.findOne({ otp })
+       /* const existing = await Code.findOne({ otp })
 
         if (existing){
             return res.json({message:'аккаунт подтвержден'})
-        }
+        }*/
+
+        return res.status(201).json({otp})
 
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
