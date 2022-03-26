@@ -22,6 +22,7 @@ router.post('/send',  async(req,res)=>{
     try{
 
         const {email} = req.body
+        email.toLowerCase()
 
         let otp = Math.random();
         otp = otp * 100000;
