@@ -1,6 +1,7 @@
 const {Router} = require('express')
 const nodemailer=require('nodemailer')
 const Code = require('../models/Code')
+const Customer = require('../models/Customer')
 
 const router = Router()
 
@@ -56,12 +57,15 @@ router.post('/send',  async(req,res)=>{
 
 router.post('/verify',  async(req,res)=>{
     try {
-        const {otp} = req.body
+        const {otp, email} = req.body
+
 
        const existing = await Code.findOne({ otp })
 
         if (existing){
-            return res.status(201).json({message:otp + ' otp'})
+            const customer = await new Customer({email})
+            customer.save()
+            return res.status(201).json({message:'пользователь создан'})
         }
 
 
