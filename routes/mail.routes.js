@@ -40,7 +40,7 @@ router.post('/send',  async(req,res)=>{
 
         await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                return console.log(error);
+                return res.status(201).json({message: 'message' + error});
             }
             res.status(201).json({message: 'message' + email});
 
