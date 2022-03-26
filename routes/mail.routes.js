@@ -2,6 +2,8 @@ const {Router} = require('express')
 const nodemailer=require('nodemailer')
 const Code = require('../models/Code')
 const Customer = require('../models/Customer')
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const router = Router()
 
@@ -63,12 +65,24 @@ router.post('/verify',  async(req,res)=>{
        const existing = await Code.findOne({ otp })
 
         if (existing){
-            const customer = await new Customer({email})
-            customer.save()
-            return res.status(201).json({message:'пользователь создан'})
+            const isUser = await Customer.findOne({ email })
+            if(!isUser){
+                const customer = await new Customer({email})
+                customer.save()
+                const token = jwt.sign(
+                    { email: email },
+                    config.get('jwtSecret'),
+                )
+                res.status(201).json({ token, email: email })
+            }else{
+                const token = jwt.sign(
+                    { email: email },
+                    config.get('jwtSecret'),
+                )
+                res.status(201).json({ token, email: email })
+            }
+
         }
-
-
 
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
