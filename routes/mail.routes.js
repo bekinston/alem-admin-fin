@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
     secure: false,
     auth: {
         user: 'support@alem-cinema.kz',
-        pass: 'Mydick99',
+        pass: '1Pf25cwzNXZkqdPz28G7',
     }
 
 });
