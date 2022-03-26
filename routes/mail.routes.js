@@ -61,6 +61,7 @@ router.post('/verify',  async(req,res)=>{
     try {
         const {otp, email} = req.body
 
+        email.toLowerCase()
 
        const existing = await Code.findOne({ otp })
 
@@ -89,9 +90,5 @@ router.post('/verify',  async(req,res)=>{
     }
 
 });
-
-
-
-
 
 module.exports = router
