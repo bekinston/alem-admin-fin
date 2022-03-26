@@ -11,8 +11,8 @@ const router = Router()
 
 let transporter = nodemailer.createTransport({
     host: "smtp.mail.ru",
-    port: 465,
-    secure: true,
+    port: 584,
+    secure: false,
     auth: {
         user: 'support@alem-cinema.kz',
         pass: 'Mydick99',
