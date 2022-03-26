@@ -17,7 +17,6 @@ app.use('/api/soon', require('./routes/soon.routes'))
 app.use('/api/pay', require('./routes/pay.routes'))
 app.use('/api/upload', require('./routes/upload.routes'))
 app.use('/api/mail', require('./routes/mail.routes'))
-app.use('/mailru-domaineKe3DOc7FT5T9b6J.html', require('./mailru-domaineKe3DOc7FT5T9b6J.html'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')))
