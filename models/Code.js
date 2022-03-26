@@ -6,4 +6,4 @@ const schema = new Schema({
 
 })
 
-module.exports = model('Customer', schema)
+module.exports = model('Code', schema)

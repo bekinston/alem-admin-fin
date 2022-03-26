@@ -1,13 +1,10 @@
 const {Router} = require('express')
 const nodemailer=require('nodemailer')
 const Code = require('../models/Code')
-var bodyParser = require('body-parser')
-var jsonParser = bodyParser.json();
-
+const Customer = require('../models/Customer')
+const Film = require("../models/Film");
 
 const router = Router()
-
-
 
 let transporter = nodemailer.createTransport({
     host: "smtp.mail.ru",
@@ -26,7 +23,7 @@ router.post('/send',  async(req,res)=>{
         const {email} = req.body
 
         let otp = Math.random();
-        otp = otp * 1000000;
+        otp = otp * 100000;
         otp = parseInt(otp);
 
         const code = new Code({email, code:otp})
@@ -43,7 +40,7 @@ router.post('/send',  async(req,res)=>{
             if (error) {
                 return console.log(error);
             }
-            res.status(201).json({message: 'message' + email});
+            res.status(201).json({message: 'otp' + opt});
 
             }
         )}catch (e) {
@@ -59,33 +56,23 @@ router.post('/send',  async(req,res)=>{
     });*/
 });
 
-router.post('/verify',function(req,res){
+router.post('/verify',  async(req,res)=>{
+    try {
+        const {otp} = req.body
 
-    if(req.body.otp===otp){
-        res.send("You has been successfully registered");
-    }
-    else{
-        res.render('otp',{msg : 'otp is incorrect'});
-    }
-});
+        const existing = await Code.findOne({ otp })
 
-router.post('/resend',function(req,res){
-    var mailOptions={
-        to: email.toLowerCase(),
-        subject: "Otp for registration is: ",
-        html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
+        if (existing){
+            return res.json({message:'аккаунт подтвержден'})
         }
-        console.log('Message sent: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        res.render('otp',{msg:"otp has been sent"});
-    });
+
+    }catch (e) {
+        res.status(500).json({message:'noooooo.....'});
+    }
 
 });
+
+
 
 
 
