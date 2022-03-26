@@ -10,11 +10,11 @@ const router = Router()
 
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.google.com",
+    host: "smtp.mail.ru",
     port: 465,
     secure: true,
     auth: {
-        user: 'bekt884@yandex.kz',
+        user: 'support@alem-cinema.kz',
         pass: 'Mydick99',
     }
 
