@@ -66,7 +66,7 @@ router.post('/verify',  async(req,res)=>{
             return res.json({message:'аккаунт подтвержден'})
         }*/
 
-        return res.status(201).json({otp})
+        return res.status(201).json({message:otp + ' otp'})
 
     }catch (e) {
         res.status(500).json({message:'noooooo.....'});
