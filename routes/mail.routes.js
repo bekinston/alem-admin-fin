@@ -10,7 +10,7 @@ const router = Router()
 
 
 let transporter = nodemailer.createTransport({
-    host: "mxs.mail.ru",
+    host: "smtp.mail.ru",
     port: 587,
     secure: false,
     auth: {
