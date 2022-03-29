@@ -42,7 +42,8 @@ router.post('/send',  async(req,res)=>{
             if (error) {
                 return console.log(error);
             }
-            res.status(201).json({message: 'otp' + opt});
+            let otptext = otp.toString();
+            res.status(201).json({otptext});
 
             }
         )}catch (e) {
