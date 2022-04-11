@@ -20,7 +20,7 @@ router.post('/addsoon', async (req, res) => {
     const {name, date, photo, desc} = req.body
 
 
-    const go = new Soon({name, date, photo, desc, state:"go"})
+    const go = new Soon({name, date, photo, desc, state:"go", , start:Date.now()})
 
 
     go.save()
@@ -35,7 +35,7 @@ router.post('/addsoon', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const soons = await Soon.find({ state: "go" })
+    const soons = await Soon.find({ state: "go" }).sort({start: -1})
     res.json(soons)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
