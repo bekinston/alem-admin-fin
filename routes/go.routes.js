@@ -5,28 +5,20 @@ const router = Router()
 router.post('/searchfilm', async (req,res) => {
   try {
     const {name} = req.body
-
     const ready = await Film.findOne({name})
-
     if(!ready){
       return res.json({message:"фильм не найден"})
     }
-
     res.status(201).json({ ready })
   } catch (e) {
-
   }
 })
 
 router.post('/deletefilm', async (req, res) => {
   try {
     const {name} = req.body
-
-
     const go = await Film.updateOne({name}, {$set: {state : "zero"}})
-
     res.status(201).json({ message:'Фильм удален' })
-
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
@@ -34,15 +26,8 @@ router.post('/deletefilm', async (req, res) => {
 
 router.post('/addfilm', async (req, res) => {
   try {
-
-
-
-
-
     const {name, promo, cost} = req.body
-
     var onsc = 90
-
     const days = await Film.findOne({name, onscreen:"90"})
     if (!days){
          onsc = 45
@@ -117,7 +102,7 @@ router.post('/addfilm', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const films = await Film.find({ state: "go" })
+    const films = await Film.find({ state: "go" }).sort({date:-1})
     res.json(films)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
