@@ -94,7 +94,7 @@ router.post('/addfilm', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const films = await Film.find({ state: "go" }).sort({start:-1})
+    const films = await Film.find({ state: "go" }).sort({start:1})
     res.json(films)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
