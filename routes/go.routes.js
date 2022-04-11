@@ -83,17 +83,9 @@ router.post('/addfilm', async (req, res) => {
             month2 = '0' + month2;
         if (day2.length < 2)
             day2 = '0' + day2;
-
-
     var startdate1 = [day1, month1, year1].join('.')
-
     var enddate1 = [day2, month2, year2].join('.')
-
-
     const go = await Film.updateOne({name}, {$set: {state : "go", promo : promo, cost: cost, startdate: startdate1, enddate:enddate1 }})
-
-
-
     res.status(201).json({ message:'Фильм добавлен' })
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
@@ -102,7 +94,7 @@ router.post('/addfilm', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const films = await Film.find({ state: "go" }).sort({date:-1})
+    const films = await Film.find({ state: "go" }).sort({startdate:-1})
     res.json(films)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
