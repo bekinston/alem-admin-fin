@@ -20,7 +20,7 @@ router.post('/addsoon', async (req, res) => {
     const {name, date, photo, desc} = req.body
 
 
-    const go = new Soon({name, date, photo, desc, state:"go", , start:Date.now()})
+    const go = new Soon({name, date, photo, desc, state:"go", start:Date.now()})
 
 
     go.save()
