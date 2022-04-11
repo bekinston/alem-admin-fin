@@ -5,7 +5,8 @@ const schema = new Schema({
   date: {type:String},
   photo:{type:String, required:true},
   desc:{type:String},
-  state:{type:String}
+  state:{type:String},
+  start:{type:Date}
 
 })
 
