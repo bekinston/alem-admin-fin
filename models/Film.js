@@ -42,7 +42,8 @@ const schema = new Schema({
   actor9p:{type:String},
   actor10:{type:String},
   actor10p:{type:String},
-  cost: {type:Number}
+  cost: {type:Number},
+  start: {type:Date}
 
 
 })
