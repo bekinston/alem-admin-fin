@@ -13,7 +13,7 @@ export const useAuth = () => {
   const login = useCallback((jwtToken, id) => {
     setToken(jwtToken)
     setUserId(id)
-    if (id == "61f7ad515860b2c1e1befbbc"){
+    if (id == "6255c57a7ec4328bfcc5614f"){
       setAdmin(true)
     }
 

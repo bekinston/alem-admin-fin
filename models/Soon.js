@@ -7,7 +7,6 @@ const schema = new Schema({
   desc:{type:String},
   state:{type:String},
   start:{type:Date}
-
 })
 
 module.exports = model('Soon', schema)

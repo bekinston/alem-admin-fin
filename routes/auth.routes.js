@@ -51,7 +51,7 @@ router.post(
 router.post(
   '/login',
   [
-    check('email', 'Введите корректный email').normalizeEmail().isEmail(),
+    check('email', 'Введите корректный email').isEmail(),
     check('password', 'Введите пароль').exists()
   ],
   async (req, res) => {
@@ -82,7 +82,6 @@ router.post(
     const token = jwt.sign(
       { userId: user.id },
       config.get('jwtSecret'),
-      { expiresIn: '1h' }
     )
 
     res.json({ token, userId: user.id })

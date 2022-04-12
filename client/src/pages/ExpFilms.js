@@ -1,8 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState, useCallback} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {useMessage} from '../hooks/message.hook'
 import {FilmTableList} from '../components/FilmTableList'
 import {GoTableList} from '../components/GoTableList'
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+let names = [];
 
 export const ExpFilms = () =>{
 
@@ -11,6 +14,27 @@ export const ExpFilms = () =>{
   const [form, setForm] = useState({
     name: ''
   })
+
+
+  const fetchNames = useCallback(async () => {
+    try {
+      if(names.length>0){
+        names = [];
+      }
+
+      const fetched = await request('/api/go/other/', 'GET', null, {
+
+      })
+      for(let i = 0; i < fetched.length; i++){
+        names.push({label:fetched[i].name});
+      }
+      console.log(names)
+    } catch (e) {}
+  }, [request])
+
+  useEffect(() => {
+    fetchNames();
+  }, [fetchNames])
 
   const [data, SetData] = useState({
     name:'',
@@ -91,14 +115,13 @@ export const ExpFilms = () =>{
 
           <div className = "card" style={{padding:20}}>
           <center><h5 className="head">Поиск фильма</h5></center>
-          <input
-            className="box-input"
-            id = "name"
-            name = "name"
-            style={{marginTop:10}}
-            value={form.name}
-            onChange={changeHandler}
-            placeholder="Введите название фильма"/>
+            <center><Autocomplete
+                onChange={(event, value) => setForm({name: value.label})}
+                id="combo-box-demo"
+                options={names}
+                sx={{ width: '91%', padding:-10}}
+                renderInput={(params) => <TextField {...params} />}
+            /></center>
             <button onClick={searchHandler} className="login1-btn z-depth-1" style={{marginTop:20}}>Искать</button>
           </div>
 

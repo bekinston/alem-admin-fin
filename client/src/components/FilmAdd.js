@@ -1,6 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState, useCallback} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {useMessage} from '../hooks/message.hook'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+let names = [];
 
 export const FilmAdd = () => {
 
@@ -13,6 +16,27 @@ export const FilmAdd = () => {
   const [checked, setChecked] = useState({
     enabled:false
   })
+
+
+  const fetchNames = useCallback(async () => {
+    try {
+      if(names.length>0){
+        names = [];
+      }
+
+      const fetched = await request('/api/go/other/', 'GET', null, {
+
+      })
+      for(let i = 0; i < fetched.length; i++){
+        names.push({label:fetched[i].name});
+      }
+      console.log(names)
+    } catch (e) {}
+  }, [request])
+
+  useEffect(() => {
+    fetchNames();
+  }, [fetchNames])
 
 
 
@@ -59,14 +83,12 @@ export const FilmAdd = () => {
     <div>
     <div className="input-field">
       <p style={{marginLeft:50}}>Фильм</p>
-      <center><input
-        placeholder="Введите название фильма"
-        id="name"
-        type="text"
-        name="name"
-        value={form.name}
-        onChange={changeHandler}
-        className="box-input"
+      <center><Autocomplete
+          onChange={(event, value) => setForm({name: value.label})}
+          id="combo-box-demo"
+          options={names}
+          sx={{ width: '91%', padding:-10}}
+          renderInput={(params) => <TextField {...params} />}
       /></center>
     </div>
 
@@ -85,28 +107,6 @@ export const FilmAdd = () => {
       /></center>
     </div>
 
-    <div className="input-field">
-      <p style={{marginLeft:50}}>
-        <label>
-          <input type="checkbox" onChange={checkHandler} />
-          <span className = "black-text">Промокод</span>
-        </label>
-      </p>
-    </div>
-
-    <div className="input-field">
-      <center><input
-        placeholder="Введите промокод фильма"
-        id="promo"
-        type="text"
-        onChange={changeHandler}
-        value={form.promo}
-        disabled={!checked.enabled}
-        name="promo"
-
-        className="box-input"
-      /></center>
-    </div>
 
     <center><button
       className="modal-close login1-btn z-depth-1"
