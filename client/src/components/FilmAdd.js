@@ -35,20 +35,13 @@ export const FilmAdd = () => {
   }, [request])
 
   useEffect(() => {
+    window.M.updateTextFields()
     fetchNames();
-  }, [fetchNames])
-
-
-
-
-  useEffect(() => {
     message(error)
     clearError()
-  }, [error, message, clearError])
+  }, [error, message, clearError, fetchNames])
 
-  useEffect(() => {
-    window.M.updateTextFields()
-  }, [])
+
 
 
   const checkHandler = event => {
