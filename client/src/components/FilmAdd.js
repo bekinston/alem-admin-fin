@@ -3,10 +3,11 @@ import {useHttp} from '../hooks/http.hook'
 import {useMessage} from '../hooks/message.hook'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+let names = [];
 
 
 export const FilmAdd = () => {
-  let names = [];
+
 
   const message = useMessage()
   const {loading, request, error, clearError} = useHttp()
@@ -36,11 +37,19 @@ export const FilmAdd = () => {
   }, [request])
 
   useEffect(() => {
-    window.M.updateTextFields()
     fetchNames();
+  }, [fetchNames])
+
+  useEffect(() => {
     message(error)
     clearError()
-  }, [error, message, clearError, fetchNames])
+  }, [error, message, clearError])
+
+  useEffect(() => {
+    window.M.updateTextFields()
+  }, [])
+
+
 
 
 

@@ -5,10 +5,11 @@ import {FilmTableList} from '../components/FilmTableList'
 import {GoTableList} from '../components/GoTableList'
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+let names = [];
 
 
 export const ExpFilms = () =>{
-  let names = [];
+
 
   const message = useMessage()
   const {loading, request, error, clearError} = useHttp()
