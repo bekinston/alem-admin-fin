@@ -38,6 +38,7 @@ export const FilmAdd = () => {
 
   useEffect(() => {
     fetchNames();
+
   }, [fetchNames])
 
   useEffect(() => {
