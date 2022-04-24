@@ -7,6 +7,7 @@ const schema = new Schema({
   content:{type:String, required:true},
   desc:{type:String},
   url:{type:String},
+  sec:{type:String},
   state:{type:String},
 })
 

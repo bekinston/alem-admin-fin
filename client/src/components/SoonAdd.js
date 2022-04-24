@@ -60,6 +60,7 @@ export const SoonAdd = () => {
     content:'',
     desc:'',
     url:'',
+      sec:'',
     state:'go'
   });
 
@@ -128,6 +129,18 @@ export const SoonAdd = () => {
                   </div>
               </div>
 
+          </div>
+
+          <div className="input-field">
+              <p style={{marginLeft:50}}>секунд до пролистывания</p>
+              <center><input
+                  placeholder="секунд"
+                  type="text"
+                  required
+                  name="sec"
+                  className="box-input"
+                  onChange = {changeHandler}
+              /></center>
           </div>
 
 

@@ -18,8 +18,8 @@ router.post('/deletesoon', async (req, res) => {
 
 router.post('/addsoon', async (req, res) => {
   try {
-    const {name, isVideo, logo, content, desc, url, state} = req.body
-    const go = new Soon({name, isVideo, logo, content, desc, url, state})
+    const {name, isVideo, logo, content, desc, url, state,sec} = req.body
+    const go = new Soon({name, isVideo, logo, content, desc, url, state, sec})
     go.save()
     res.status(201).json({ message:'Интересное добавлено' })
   } catch (e) {
