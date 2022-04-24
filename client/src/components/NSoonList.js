@@ -27,19 +27,16 @@ export const NSoonList= ({ users }) => {
                     return (
                       <>
                         <div className = "fcard1 z-depth-1">
-                          <img src = {user.photo} className="responsive-img banner center"/>
-                          <p className="center">{user.name}</p>
+                          <img src = {user.logo} className="responsive-img banner center"/>
+                          <p className="center">название:  {user.name}</p>
                           <div className="green lighten-5 center" style={{padding:10}}>
-                            <p>Дата начала</p>
-                            <p>{user.date}</p>
+                            <p>описание: {user.desc}</p>
                           </div>
-                          <p style={{padding:10}} className="center">{user.desc}</p>
                           <div className="center">
                             <button className="login1-btn z-depth-1" style={{margin:20}} onClick={
-
                                 async()=>{
-                                  const n = user.photo
-                                  const data = await request('/api/soon/deletesoon', 'POST', {photo:n})
+                                    const n=user._id
+                                  const data = await request('/api/soon/deletesoon', 'POST', {_id:n})
                                   message(data.message)
                                   window.location.reload(false)
                                 }

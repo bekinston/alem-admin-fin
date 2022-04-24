@@ -53,6 +53,18 @@ router.post('/upload', async (req, res) => {
   }
 })
 
+router.post('/soon', async (req, res) => {
+  try {
+    let buffer = req.files[0].buffer
+
+    var upload = await s3.Upload({buffer}, '/soonfiles/')
+
+    res.status(201).json({upload})
+  } catch (e) {
+    res.status(500).json({e})
+  }
+})
+
 
 
 

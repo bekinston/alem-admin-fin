@@ -1,153 +1,163 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {useHttp} from '../hooks/http.hook'
-import {useMessage} from '../hooks/message.hook'
-import axios from 'axios'
+import React, {useState} from 'react';
+import axios from "axios";
 
 export const SoonAdd = () => {
-  const message = useMessage()
-  const {loading, request, error, clearError} = useHttp()
+  const [checked, setChecked] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
-  const [udir, setUdir] = useState({
-    sdir:null
-  })
-
-  const [udiruri, setUdiruri] = useState({
-    sdiruri:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'
-  })
-
-  const dirchangeHandler = event => {
-    setUdir({sdir: event.target.files[0]})
+  const [logouri, setLogouri] = useState('');
+  const [file1, setFile1] = useState(
+      {logo:null}
+  );
+  const handleFile1 = event =>{
+    setFile1({logo: event.target.files[0]});
   }
-
-  const dirupload = async() => {
+  const sendFile1 = async() => {
+      setDisabled(true);
     const formData = new FormData()
-
     formData.append(
-      "MyFile",
-      udir.sdir,
-      udir.sdir.name
+        "MyFile",
+        file1.logo,
+        file1.logo.name
     )
-
-    await axios.post("api/upload/upload", formData)
-    .then((response) => {
-      let d = response.data.upload.Location
-      setUdiruri({sdiruri:d})
-
-      console.log(d)
-    }, (error) => {
-      console.log(error)
-    })
+    await axios.post("api/upload/soon", formData)
+        .then((response) => {
+          setLogouri(response.data.upload.Location);
+          setDisabled(false);
+        }, (error) => {
+          console.log(error)
+        })
   }
 
+    const [contenturi, setContenturi] = useState('');
+    const [file2, setFile2] = useState(
+        {content:null}
+    );
+    const handleFile2 = event =>{
+        setFile2({content: event.target.files[0]});
+    }
+    const sendFile2 = async() => {
+        setDisabled(true);
+        const formData = new FormData()
+        formData.append(
+            "MyFile",
+            file2.content,
+            file2.content.name
+        )
+        await axios.post("api/upload/soon", formData)
+            .then((response) => {
+                setContenturi(response.data.upload.Location);
+                setDisabled(false);
+            }, (error) => {
+                console.log(error)
+            })
+    }
 
-  const [form, setForm] = useState({
-    name: '', date: '', photo: '', desc: ''
-  })
-
-  useEffect(() => {
-    message(error)
-    clearError()
-  }, [error, message, clearError])
-
-  useEffect(() => {
-    window.M.updateTextFields()
-  }, [])
+  const [data, setData] = useState({
+    isVideo:'false',
+    name:'',
+    logo:'',
+    content:'',
+    desc:'',
+    url:'',
+    state:'go'
+  });
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
+    if(event.target.name === 'isVideo'){
+      setChecked(!checked);
+    }
+    setData({...data, [event.target.name]: event.target.value});
   }
 
 
-  const addHandler = async () => {
-    try {
-
-        if(form.photo=='https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg'){
-          message("Добавьте фото")
-        }else{
-          const data = await request('/api/soon/addsoon', 'POST', {...form})
-          message(data.message)
-          if(data.message == "Интересное добавлено"){
-            window.location.reload(false)
-          }
-        }
-
-
-
-
-    } catch (e) {}
+  const confirmHandler = async() => {
+      await axios.post("api/soon/addsoon", {...data})
+          .then((response) => {
+              console.log(response);
+              setDisabled(false);
+              window.location.reload();
+          }, (error) => {
+              console.log(error)
+          })
   }
+
+
+
+
+
 
   return(
-    <div>
-    <div className="input-field">
-      <p style={{marginLeft:50}}>Заголовок</p>
-      <center><input
-        placeholder="Введите заголовок"
-        id="name"
-        type="text"
-        onChange={changeHandler}
-        value={form.name}
-        name="name"
-        className="box-input"
-      /></center>
-    </div>
+      <>
+          <div className="input-field">
+              <p style={{marginLeft:50}}>Заголовок(не обязательно)</p>
+              <center><input
+                  placeholder="Заголовок"
+                  type="text"
+                  required
+                  name="name"
+                  className="box-input"
+                  onChange = {changeHandler}
+              /></center>
+          </div>
 
-    <div className="input-field" hidden>
-      <p style={{marginLeft:50}}>Фото</p>
-      <center><input
-        placeholder="url фотографии"
-        id="photo"
-        type="text"
-        name="photo"
-        onChange={changeHandler}
-        value={form.photo = udiruri.sdiruri}
-        className="box-input"
-      /></center>
-    </div>
+        <p style={{marginLeft:35}}>
+          <label>
+            <input required type="checkbox" name='isVideo' checked={checked} value={checked === true ? ('false') : ('true')} onChange={changeHandler}/>
+            <span style={{color:'black'}}>Это видео? *</span>
+          </label>
+        </p>
 
-    <div className="input-field">
-      <p className="center">Баннер</p>
-      <center><img src = {udiruri.sdiruri} className = "images responsive-img" style = {{width:150, height:270}}></img></center>
-      <center><input type="file" onChange = {dirchangeHandler} className = "box-input"/></center>
+          <div className = 'row'>
+              <div style={{padding:10, width:'90%', marginLeft:'5%', marginRight:'5%'}} className='card'>
+                  <p>Загрузите логотип</p>
+                  <div className='center'><img src={logouri} style={{width:50, height:50, borderRadius:25, borderWidth:2, borderColor:'black'}}/></div>
+                  <div style={{marginBottom:20}} className='center-block'>
+                      <input type='text' hidden value={data.logo=logouri} onChange={changeHandler}/>
+                      <input style={{marginTop:15}} type='file' onChange={handleFile1}/>
+                      <button className='login-btn right z-depth-1' disabled={disabled} onClick={sendFile1}>загрузить</button>
+                  </div>
+              </div>
 
-      <center><button className="loginu-btn center z-depth-1 center" onClick = {dirupload}>Загрузить фото</button></center>
-    </div>
+              <div style={{padding:10, width:'90%', marginLeft:'5%', marginRight:'5%'}} className='card'>
+                  <p>Загрузите контент</p>
+                  <div style={{marginBottom:20}} className='center-block'>
+                      <input type='text' hidden value={data.content=contenturi} onChange={changeHandler}/>
+                      <input style={{marginTop:15}} type='file' onChange={handleFile2}/>
+                      <button className='login-btn right z-depth-1' disabled={disabled} onClick={sendFile2}>загрузить</button>
+                  </div>
+              </div>
 
-
-    <div className="input-field">
-      <p style={{marginLeft:50}}>Дата начала</p>
-      <center><input
-        id="date"
-        type="date"
-        name="date"
-        onChange={changeHandler}
-        value={form.date}
-        className="box-input"
-      /></center>
-    </div>
-
-    <div className="input-field">
-      <p style={{marginLeft:50}}>URL клиента</p>
-      <center><input
-        id="desc"
-        placeholder="URL"
-        type="text"
-        name="desc"
-        onChange={changeHandler}
-        value={form.desc}
-        className="box-input"
-      /></center>
-    </div>
+          </div>
 
 
-    <center><button
-      className="modal-close login1-btn z-depth-1"
-      style={{marginRight: 10}}
-      onClick={addHandler}
-    >
-      Выложить
-    </button></center>
 
-    </div>
+          <div className="input-field">
+              <p style={{marginLeft:50}}>Описание</p>
+              <center><input
+                  placeholder="Напишите описание"
+                  type="text"
+                  required
+                  name="desc"
+                  className="box-input"
+                  onChange = {changeHandler}
+              /></center>
+          </div>
+
+          <div className="input-field">
+              <p style={{marginLeft:50}}>URL для перехода (не обязательно)</p>
+              <center><input
+                  placeholder="URL"
+                  type="text"
+                  required
+                  name="url"
+                  className="box-input"
+                  onChange = {changeHandler}
+              /></center>
+          </div>
+
+
+        <div className='center'><button className='center login-btn z-depth-1' disabled={disabled} onClick={confirmHandler}>Выложить</button></div>
+      </>
   )
 }

@@ -2,11 +2,12 @@ const {Schema, model,Types} = require('mongoose')
 
 const schema = new Schema({
   name: {type:String},
-  date: {type:String},
-  photo:{type:String, required:true},
+  isVideo: {type:String},
+  logo:{type:String},
+  content:{type:String, required:true},
   desc:{type:String},
+  url:{type:String},
   state:{type:String},
-  start:{type:Date}
 })
 
 module.exports = model('Soon', schema)
