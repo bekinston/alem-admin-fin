@@ -2,6 +2,7 @@ const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
 const path = require('path')
+const http = require("http");
 
 const app = express()
 
@@ -36,7 +37,7 @@ async function start() {
       useUnifiedTopology: true
     })
 
-    app.listen(PORT, () => console.log(`App has been started on port ${PORT} ...`))
+    http.createServer(app).listen(PORT, () => console.log(`App has been started on port ${PORT} ...`));
   } catch (e) {
     console.log('Server Error', e.message)
     process.exit(1)
