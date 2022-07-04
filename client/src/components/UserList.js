@@ -34,12 +34,15 @@ export const UserList = ({ users }) => {
                   <td>{user.tel}</td>
                   <td>{user.iban}</td>
                   <td>{user.bank}</td>
-                    <td><button onClick={()=>{
-                        axios.post('/api/auth/delete', {email:user.email}).then(result=>{
+                    {
+                        user.email !== 'alem-cinema@yandex.kz' &&
+                        <td><button onClick={()=>{
+                            axios.post('/api/auth/delete', {email:user.email}).then(result=>{
+                            })
+                            window.location.reload()
+                        }}>Удалить</button></td>
+                    }
 
-                        })
-                        window.location.reload()
-                    }}>Удалить</button></td>
                 </tr>
               )
             }) }
