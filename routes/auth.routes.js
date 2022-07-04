@@ -47,6 +47,20 @@ router.post(
   }
 })
 
+router.post('/delete', async (req, res) => {
+      const {email} = req.body;
+      try{
+        const user = await User.findOne({ email });
+        user.deleteOne();
+      }catch (e) {
+
+      }
+
+
+    })
+
+
+
 // /api/auth/login
 router.post(
   '/login',

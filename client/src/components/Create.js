@@ -3,8 +3,53 @@ import {useHttp} from '../hooks/http.hook'
 import {useMessage} from '../hooks/message.hook'
 import {AuthContext} from '../context/AuthContext'
 import {NavLink, useNavigate} from 'react-router-dom'
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export const Create = () => {
+  const banks = [
+    {label:'АО "First Heartland Bank"', value:'ABNAKZKX'},
+    {label:'АО "Дочерний Банк "АЛЬФА-БАНК"', value:'ALFAKZKA'},
+    {label:'АО "АТФБанк"', value:'ALMNKZKA'},
+    {label:'АО "Altyn Bank" (ДБ China Citic Bank Corporation Limited)', value:'ATYNKZKA'},
+    {label:'АО ДБ "БАНК КИТАЯ В КАЗАХСТАНЕ"', value:'BKCHKZKA'},
+    {label:'АО "KASPI BANK"', value:'CASPKZKA'},
+    {label:'АО "Центральный Депозитарий Ценных Бумаг"', value:'CEDUKZKA'},
+    {label:'АО "Ситибанк Казахстан"', value:'CITIKZKA'},
+    {label:'АО "Банк Развития Казахстана"', value:'DVKAKZKA'},
+    {label:'ЕВРАЗИЙСКИЙ БАНК РАЗВИТИЯ', value:'EABRKZKA'},
+    {label:'НАО Государственная корпорация "Правительство для граждан"', value:'EURIKZKA'},
+    {label:'АО "Жилстройсбербанк Казахстана"', value:'HCSKKZKA'},
+    {label:'АО "Исламский Банк "Al Hilal"', value:'HLALKZKZ'},
+    {label:'АО "Народный Банк Казахстана"', value:'HSBKKZKX'},
+    {label:'АО "Торгово-промышленный Банк Китая в г. Алматы"', value:'ICBKKZKX'},
+    {label:'г.Москва Межгосударственный Банк', value:'INEARUMM'},
+    {label:'ДБ АО "Хоум Кредит энд Финанс Банк"', value:'INLMKZKA'},
+    {label:'АО "ForteBank"', value:'IRTYKZKA'},
+    {label:'АО "Банк ЦентрКредит"', value:'KCJBKZKX'},
+    {label:'АО "Казахстанская фондовая биржа"', value:'KICEKZKX'},
+    {label:'АО "Банк "Bank RBK"', value:'KINCKZKA'},
+    {label:'РГП "Казахстанский центр межбанковских расчетов НБРК"', value:'KISCKZKX'},
+    {label:'РГУ "Комитет казначейства Министерства финансов РК"', value:'KKMFKZ2A'},
+    {label:'АО "КАЗПОЧТА"', value:'KPSTKZKA'},
+    {label:'АО "Банк Kassa Nova" (Дочерний банк АО "ForteBank")', value:'KSNVKZKA'},
+    {label:'АО "ДБ "КАЗАХСТАН-ЗИРААТ ИНТЕРНЕШНЛ БАНК"', value:'KZIBKZKA'},
+    {label:'АО "AsiaCredit Bank (АзияКредит Банк)"', value:'LARIKZKA'},
+    {label:'АО ДБ "Национальный Банк Пакистана" в Казахстане', value:'NBPAKZKA'},
+    {label:'"Банк-кастодиан АО  "ЕНПФ"', value:'NBPFKZKX'},
+    {label:'РГУ Национальный Банк Республики Казахстан', value:'NBRKKZKX'},
+    {label:'АО "Нурбанк"', value:'NURSKZKX'},
+    {label:'ДБ АО "Сбербанк"', value:'SABRKZKA'},
+    {label:'АО "Шинхан Банк Казахстан"', value:'SHBKKZKA'},
+    {label:'АО "Capital Bank Kazakhstan"', value:'TBKBKZKA'},
+    {label:'АО "Tengri Bank"', value:'TNGRKZKX'},
+    {label:'ДО АО Банк ВТБ (Казахстан)', value:'VTBAKZKZ'},
+    {label:'АО "Исламский банк "Заман-Банк"', value:'ZAJSKZ22'}
+  ]
+
+  const [bik, setBik] = useState('');
+
   const auth = useContext(AuthContext)
   const message = useMessage()
   const history = useNavigate()
@@ -36,7 +81,10 @@ export const Create = () => {
         message(data.message)
 
     } catch (e) {}
+    console.log(form);
   }
+
+
 
   return (
     <div className="row">
@@ -146,18 +194,15 @@ export const Create = () => {
               </div>
 
               <div className="input-field">
-                <p style={{marginLeft:50}}>Банк</p>
-                <center><input
-                placeholder="Введите код банка"
-                id="bank"
-                className="box-input"
-                type="text"
-                name="bank"
-                value={form.bank}
-                onChange={changeHandler}
+                <p style={{marginLeft:50}}>БИК</p>
+                <center><Autocomplete
+                    onChange={(event, value) => setBik(value.value)}
+                    id="combo-box-demo"
+                    options={banks}
+                    sx={{ width: '92%', padding:-10}}
+                    renderInput={(params) => <TextField {...params} />}
                 /></center>
-
-
+                <input hidden={true} value={form.bank = bik}/>
               </div>
 
 

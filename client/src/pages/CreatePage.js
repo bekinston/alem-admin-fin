@@ -662,8 +662,8 @@ export const CreatePage = () => {
               <div className = "radio1">
                 <p style = {{width:300}}>
                   <label>
-                    <input  name="onscreen" type="radio" value="45"/>
-                    <span className = "radio">45 дней</span>
+                    <input  name="onscreen" type="radio" value="30"/>
+                    <span className = "radio">30 дней</span>
                   </label>
                 </p>
               </div>
@@ -671,8 +671,8 @@ export const CreatePage = () => {
               <div className = "radio2">
                 <p>
                   <label>
-                    <input name="onscreen" type="radio" value="90"/>
-                    <span className = "radio">90 дней</span>
+                    <input name="onscreen" type="radio" value="45"/>
+                    <span className = "radio">45 дней</span>
                   </label>
                 </p>
               </div>

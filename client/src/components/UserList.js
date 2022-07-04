@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from "axios";
 
 
 export const UserList = ({ users }) => {
@@ -33,6 +34,12 @@ export const UserList = ({ users }) => {
                   <td>{user.tel}</td>
                   <td>{user.iban}</td>
                   <td>{user.bank}</td>
+                    <td><button onClick={()=>{
+                        axios.post('/api/auth/delete', {email:user.email}).then(result=>{
+
+                        })
+                        window.location.reload()
+                    }}>Удалить</button></td>
                 </tr>
               )
             }) }
