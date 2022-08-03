@@ -7,6 +7,9 @@ const config = require("config");
 
 const router = Router()
 
+const {check, validationResult} = require("express-validator");
+const User = require("../models/User");
+
 let transporter = nodemailer.createTransport({
     host: "smtp.mail.ru",
     port: 465,
@@ -18,24 +21,34 @@ let transporter = nodemailer.createTransport({
 
 });
 
-router.post('/send',  async(req,res)=>{
+router.post(
+    '/send',
+    [
+        check('email', 'Некорректный email').isEmail(),
+    ],
+    async (req, res) => {
     try{
-
         const {email} = req.body
-        email.toLowerCase()
-
+        email.toLowerCase();
         let otp = Math.random();
-        otp = otp * 100000;
+        otp = otp * 10000;
         otp = parseInt(otp);
 
-        const code = new Code({email, code:otp})
-        code.save()
+        let candidate = await Customer.findOne({ email })
+
+        if(candidate){
+            candidate.code = otp;
+        }else{
+            candidate = new Customer( {email, code:otp, film:[]})
+        }
+
+        candidate.save();
 
         const mailOptions = {
             from: "support@alem-cinema.kz",
             to: email,
-            subject: "Otp for registration is: ",
-            html: "<h3>OTP for account verification is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
+            subject: "Код верификации: ",
+            html: "<h3>Код верификации аккаунта </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
 
         await transporter.sendMail(mailOptions, (error, info) => {
@@ -44,7 +57,6 @@ router.post('/send',  async(req,res)=>{
             }
             let otptext = otp.toString();
             res.status(201).json({otptext});
-
             }
         )}catch (e) {
         res.status(500).json({message:'noooooo.....'});

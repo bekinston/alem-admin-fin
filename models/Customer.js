@@ -2,7 +2,18 @@ const {Schema, model,Types} = require('mongoose')
 
 const schema = new Schema({
     email:{type:String},
-    films : { type : Array , "default" : [] },
+    code:{type:String},
+    films:[{
+        name:{type:String},
+        genres:{type:String},
+        time:{type:String},
+        banner:{type:String},
+        film:{type:String},
+    }],
 })
+
+// const elementToPush = { a: 1, b: 2 };
+// const body = { $push: { arrayField: elementToPush } };
+// model.patch(id, body);
 
 module.exports = model('Customer', schema)

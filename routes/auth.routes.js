@@ -4,9 +4,8 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
+
 const router = Router()
-
-
 
 // /api/auth/register
 router.post(
@@ -92,14 +91,11 @@ router.post(
     if (!isMatch) {
       return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
     }
-
     const token = jwt.sign(
       { userId: user.id },
       config.get('jwtSecret'),
     )
-
     res.json({ token, userId: user.id })
-
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }

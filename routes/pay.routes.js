@@ -6,8 +6,6 @@ const router = Router()
 router.post('/generate',auth, async (req, res) => {
   try {
 
-
-
     const {date, film, sum} = req.body
 
     if(date.length === 0){
