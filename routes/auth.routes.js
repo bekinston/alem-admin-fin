@@ -54,11 +54,7 @@ router.post('/delete', async (req, res) => {
       }catch (e) {
 
       }
-
-
     })
-
-
 
 // /api/auth/login
 router.post(

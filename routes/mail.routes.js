@@ -9,6 +9,7 @@ const router = Router()
 
 const {check, validationResult} = require("express-validator");
 const User = require("../models/User");
+const Film = require("../models/Film");
 
 let transporter = nodemailer.createTransport({
     host: "smtp.mail.ru",
@@ -86,7 +87,19 @@ router.post('/verify',  async(req,res)=>{
             return res.status(400).json({message:'Коды не совпадают'});
         }
 
-        res.json({ id : candidate.id, email: verify_email })
+        res.json({ id: candidate.id, email: verify_email })
+    }catch (e) {
+        res.status(500).json({message:'Ошибка сервера'});
+    }
+
+});
+
+router.get('/account/:id',  async(req,res)=>{
+    try {
+        const {id} = req.params.id;
+        let candidate = await Customer.findOne({ owner: id });
+
+        res.json({ films: candidate.films })
     }catch (e) {
         res.status(500).json({message:'Ошибка сервера'});
     }
