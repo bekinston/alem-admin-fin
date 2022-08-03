@@ -7,8 +7,8 @@ const schema = new Schema({
         name:{type:String},
         genres:{type:String},
         time:{type:String},
-        banner:{type:String},
-        film:{type:String},
+        bannerver:{type:String},
+        filmuri:{type:String},
     }],
 })
 
