@@ -106,4 +106,17 @@ router.get('/account/:id',  async(req,res)=>{
 
 });
 
+router.post('/account/pay',  async(req,res)=>{
+    try {
+        const {id, time, genres, bannerver, name, filmuri} = req.body;
+        await Customer.updateOne(
+            {_id: id},
+            {$push: {films: {"name": name, "time": time, "genres": genres, "bannerver": bannerver, "filmuri": filmuri,  }}},{new: true, upsert: true }).exec();
+
+        res.json({ message: "Фильм купден" })
+    }catch (e) {
+        res.status(500).json({message:'Ошибка сервера'});
+    }
+});
+
 module.exports = router
