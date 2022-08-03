@@ -86,7 +86,7 @@ router.post('/verify',  async(req,res)=>{
         //     return res.status(400).json({message:'Коды не совпадают'});
         // }
 
-        res.json({ otp1 : candidate.otp, otp2:otp })
+        res.json({ otp1 : candidate, otp2:otp })
     }catch (e) {
         res.status(500).json({message:'Ошибка сервера'});
     }
