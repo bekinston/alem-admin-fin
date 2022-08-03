@@ -59,7 +59,7 @@ router.post(
             res.status(201).json({otptext});
             }
         )}catch (e) {
-        res.status(500).json({message:'noooooo.....'});
+        res.status(500).json({message:'Ошибка сервера'});
     }
     // send mail with defined transport object
     /*
@@ -74,33 +74,20 @@ router.post(
 router.post('/verify',  async(req,res)=>{
     try {
         const {otp, email} = req.body
+        const verify_email = email.toLowerCase();
 
-        email.toLowerCase()
+        let candidate = await Customer.findOne({ verify_email });
 
-       const existing = await Code.findOne({ otp })
+        if(!candidate){
+            return res.status(400).json({message:'Аккаунт не зарегистрирован'});
+        }
 
-        if (existing){
-            const isUser = await Customer.findOne({ email })
-            if(!isUser){
-                const customer = await new Customer({email})
-                customer.save()
-                const token = jwt.sign(
-                    { email: email },
-                    config.get('jwtSecret'),
-                )
-                res.status(201).json({ token, email: email })
-            }else{
-                const token = jwt.sign(
-                    { email: email },
-                    config.get('jwtSecret'),
-                )
-                res.status(201).json({ token, email: email })
-            }
-
+        if(candidate.otp === otp){
+            res.status(201).json({ user:candidate._id })
         }
 
     }catch (e) {
-        res.status(500).json({message:'noooooo.....'});
+        res.status(500).json({message:'Ошибка сервера'});
     }
 
 });
