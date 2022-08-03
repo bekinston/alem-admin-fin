@@ -86,7 +86,7 @@ router.post('/verify',  async(req,res)=>{
             return res.status(400).json({message:'Коды не совпадают'});
         }
 
-        res.json({ id : candidate.id })
+        res.json({ id : candidate.id, email: verify_email })
     }catch (e) {
         res.status(500).json({message:'Ошибка сервера'});
     }
