@@ -82,10 +82,10 @@ router.post('/verify',  async(req,res)=>{
             return res.status(400).json({message:'Аккаунт не зарегистрирован'});
         }
 
-        if(candidate.otp === otp){
-            res.status(201).json({ user:candidate._id })
+        if(candidate.otp !== otp){
+            return res.status(400).json({message:'Коды не совпадают'});
         }
-
+        res.json({ id : candidate.id })
     }catch (e) {
         res.status(500).json({message:'Ошибка сервера'});
     }
