@@ -78,14 +78,15 @@ router.post('/verify',  async(req,res)=>{
 
         let candidate = await Customer.findOne({ verify_email });
 
-        if(!candidate){
-            return res.status(400).json({message:'Аккаунт не зарегистрирован'});
-        }
+        // if(!candidate){
+        //     return res.status(400).json({message:'Аккаунт не зарегистрирован'});
+        // }
+        //
+        // if(candidate.otp !== otp){
+        //     return res.status(400).json({message:'Коды не совпадают'});
+        // }
 
-        if(candidate.otp !== otp){
-            return res.status(400).json({message:'Коды не совпадают'});
-        }
-        res.json({ id : candidate.id })
+        res.json({ otp1 : candidate.otp, otp2:otp })
     }catch (e) {
         res.status(500).json({message:'Ошибка сервера'});
     }
